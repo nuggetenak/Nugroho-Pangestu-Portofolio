@@ -224,10 +224,6 @@
     line-height: 1.5; color: var(--indigo); letter-spacing: 0.02em;
     background-image: repeating-linear-gradient(135deg, var(--indigo-pale), var(--indigo-pale) 6px, var(--paper-raised) 6px, var(--paper-raised) 12px);
   }
-  .photo-caption {
-    font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
-    text-align: center; margin-top: 8px; letter-spacing: 0.03em;
-  }
   @media (max-width: 640px) {
     .hero-layout { flex-direction: column-reverse; }
     .hero-photo { width: 108px; align-self: flex-start; }
@@ -252,6 +248,14 @@
   .gallery-frame.is-clickable img { transition: filter 0.15s ease; }
   .gallery-frame.is-clickable:hover img { filter: brightness(0.93); }
   .gallery-frame.is-clickable:focus-visible { outline: 2px solid var(--indigo); outline-offset: 3px; }
+  .gallery-frame.is-clickable::after {
+    content: 'Click to expand';
+    position: absolute; right: 8px; bottom: 8px;
+    background: rgba(22,35,46,0.72); color: var(--paper);
+    font-family: var(--font-mono); font-size: 11px; font-weight: 500; line-height: 1;
+    padding: 6px 10px; border-radius: 4px; letter-spacing: 0.02em;
+    pointer-events: none;
+  }
 
   /* ---------- LIGHTBOX ---------- */
   .lightbox-overlay {
@@ -281,12 +285,12 @@
   .topnav.is-scrolled { box-shadow: 0 8px 24px -14px rgba(22,35,46,0.35); }
   .topnav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
   .topnav-mark {
-    font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--ink);
-    width: 34px; height: 34px; border: 1.5px solid var(--indigo); border-radius: 6px;
+    font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--paper);
+    width: 34px; height: 34px; background: var(--indigo); border-radius: 8px;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    transition: background 0.15s ease, color 0.15s ease;
+    transition: background 0.15s ease;
   }
-  .topnav-mark:hover { background: var(--indigo); color: #fff; }
+  .topnav-mark:hover { background: var(--indigo-deep); }
 
   .nav-links { display: flex; align-items: center; gap: 2px; }
   .nav-link {
@@ -373,7 +377,6 @@
           <img src="images/profile.jpg" alt="Foto Nugroho Pangestu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="photo-placeholder" style="display:none;">taruh foto di<br>images/profile.jpg</div>
         </div>
-        <div class="photo-caption">N. Pangestu</div>
       </div>
     </div>
 
