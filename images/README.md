@@ -11,4 +11,8 @@ Sebelum file ini ada, index.html otomatis nampilin kotak placeholder (bukan icon
 
 10 screenshot untuk section id="gallery-v87" (Exhibit A–J, build v87 — versi yang dipakai 2 junior lulus ujian). File JPEG di-recompress quality 85 tanpa resize (tetap resolusi asli, biar teks Jepang/angka masih kebaca kalau di-expand); 2 file .webp dibiarkan format asli karena sudah lebih efisien dari re-encode JPEG.
 
-Semua foto di kedua gallery exhibit ("gallery-v423" dan "gallery-v87") bisa diklik untuk expand ke lightbox (tombol × atau klik luar buat nutup) — script-nya nempel di akhir index.html, jalan otomatis ke tiap `.gallery-frame` yang ada, jadi nambah figure baru di gallery manapun otomatis ikut punya fitur expand ini.
+## bunka/
+
+3 screenshot untuk section id="gallery-bunka" (Exhibit A–C, deck 日本の文化 di AnkiDroid — deck tree lalu satu kartu depan-belakang). File JPEG di-recompress quality 85 tanpa resize, status bar HP dibiarkan apa adanya — perlakuan sama kayak v87/ &amp; v423/.
+
+Semua foto di tiap gallery exhibit ("gallery-v423", "gallery-v87", "gallery-bunka") bisa diklik untuk expand ke lightbox (tombol × atau klik luar buat nutup) — script-nya nempel di akhir index.html, jalan otomatis ke tiap `.gallery-frame` yang ada, jadi nambah figure baru di gallery manapun otomatis ikut punya fitur expand ini.
