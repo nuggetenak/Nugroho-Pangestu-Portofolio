@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nugroho Pangestu — AI Workflow Director</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%232b5580'/%3E%3Ctext x='50' y='69' font-size='58' text-anchor='middle' fill='%23f7f7f4' font-family='monospace' font-weight='600'%3EN%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #16232e;
+    --ink-soft: #3d4b56;
+    --indigo: #2b5580;
+    --indigo-deep: #1a3a54;
+    --indigo-pale: #e8edf1;
+    --brass: #8b6423;
+    --brass-light: #c9a24d;
+    --paper: #f7f7f4;
+    --paper-raised: #ffffff;
+    --line: #dedcd3;
+    --text-muted: #5b6670;
+    --font-display: 'Big Shoulders Display', sans-serif;
+    --font-body: 'IBM Plex Sans', -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SF Mono', monospace;
+    --max: 820px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection { background: var(--brass-light); color: var(--ink); }
+
+  a { color: var(--indigo); text-decoration: none; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 2px;
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 {
+    font-family: var(--font-display); font-weight: 700; margin: 0;
+    letter-spacing: 0.01em; color: var(--ink);
+  }
+
+  p { margin: 0 0 1em; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  strong { color: var(--ink); font-weight: 600; }
+
+  .eyebrow {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--indigo);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before { content: ''; width: 16px; height: 1px; background: var(--indigo); display: inline-block; }
+
+  /* ---------- HERO ---------- */
+  .hero { padding: 60px 0 44px; border-bottom: 1px solid var(--line); }
+  .hero-name { font-size: clamp(38px, 8vw, 62px); line-height: 0.98; margin-top: 18px; }
+  .hero-role {
+    font-family: var(--font-display); font-weight: 600; font-size: clamp(17px, 3vw, 22px);
+    color: var(--indigo); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 12px;
+  }
+  .hero-subrole {
+    font-family: var(--font-mono); font-size: 14px; color: var(--text-muted); margin-top: 5px;
+  }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-top: 16px;
+  }
+  .hero-meta a { color: var(--text-muted); border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+  .hero-meta a:hover { color: var(--indigo); border-color: var(--indigo); }
+  .hero-thesis { font-size: 18px; max-width: 56ch; color: var(--ink-soft); margin-top: 22px; }
+
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+  .btn {
+    font-family: var(--font-mono); font-size: 14px; font-weight: 500;
+    padding: 13px 22px; border-radius: 3px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    border: 1px solid var(--indigo);
+  }
+  .btn-primary { background: var(--indigo); color: #fff; }
+  .btn-primary:hover { background: var(--indigo-deep); border-color: var(--indigo-deep); }
+  .btn-ghost { background: transparent; color: var(--indigo); }
+  .btn-ghost:hover { background: var(--indigo-pale); }
+
+  .verify-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); margin-top: 34px;
+  }
+  .verify-item { background: var(--paper-raised); padding: 18px 20px; }
+  .verify-num { font-family: var(--font-mono); font-size: 25px; font-weight: 600; color: var(--brass); display: block; }
+  .verify-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; display: block; }
+
+  @media (max-width: 640px) { .verify-strip { grid-template-columns: 1fr; } }
+
+  .hero-fade { animation: rise 0.7s ease-out; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  .section-head { margin-bottom: 26px; }
+  .section-head h2 { font-size: clamp(25px, 4vw, 33px); margin-top: 6px; }
+
+  .role-line { font-family: var(--font-mono); font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+    background: var(--line); border: 1px solid var(--line); margin: 22px 0;
+  }
+  .stat-box { background: var(--paper-raised); padding: 15px 14px; }
+  .stat-box .n { font-family: var(--font-mono); font-size: 21px; font-weight: 600; color: var(--indigo); display: block; }
+  .stat-box .l { font-size: 12px; color: var(--text-muted); margin-top: 3px; display: block; }
+  @media (max-width: 640px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  ul.clean { list-style: none; margin: 20px 0 0; padding: 0; }
+  ul.clean li { position: relative; padding-left: 22px; margin-bottom: 12px; color: var(--ink-soft); }
+  ul.clean li::before { content: '—'; position: absolute; left: 0; color: var(--brass); }
+  ul.clean li:last-child { margin-bottom: 0; }
+
+  .proof-box { border-left: 3px solid var(--brass); background: var(--paper-raised); padding: 16px 20px; margin: 22px 0; }
+  .proof-box .tag {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--brass);
+    text-transform: uppercase; display: block; margin-bottom: 8px;
+  }
+
+  .version-flow { display: flex; align-items: stretch; margin: 22px 0; border: 1px solid var(--line); }
+  .version-node { flex: 1; padding: 18px 20px; background: var(--paper-raised); }
+  .version-node .tag {
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: .06em; display: block;
+  }
+  .version-node .v { font-family: var(--font-mono); font-weight: 600; font-size: 16px; color: var(--ink); display: block; margin-top: 4px; }
+  .version-node .vdesc { font-size: 14px; color: var(--ink-soft); margin-top: 8px; }
+  .version-node .vlinks { font-family: var(--font-mono); font-size: 13px; margin-top: 8px; display: block; }
+  .version-arrow {
+    display: flex; align-items: center; justify-content: center; width: 46px; flex-shrink: 0;
+    background: var(--indigo-pale); color: var(--indigo); font-family: var(--font-mono); font-size: 18px;
+  }
+  @media (max-width: 640px) {
+    .version-flow { flex-direction: column; }
+    .version-arrow { width: 100%; height: 30px; }
+  }
+
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 24px; }
+  .work-card { background: var(--paper-raised); padding: 22px; }
+  .work-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .work-card .stat { font-family: var(--font-mono); color: var(--brass); font-weight: 600; font-size: 14px; margin-top: 10px; }
+  @media (max-width: 640px) { .work-grid { grid-template-columns: 1fr; } }
+
+  .timeline { border-left: 2px solid var(--line); padding-left: 24px; margin-left: 4px; }
+  .tl-item { margin-bottom: 26px; position: relative; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -29px; top: 6px; width: 8px; height: 8px;
+    border-radius: 50%; background: var(--indigo);
+  }
+  .tl-item h3 { font-size: 18px; margin-top: 2px; }
+  .tl-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+  .tl-item p { margin-top: 6px; }
+
+  .fit-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+  .fit-list li { display: flex; gap: 14px; align-items: flex-start; }
+  .fit-check {
+    flex-shrink: 0; width: 22px; height: 22px; border: 1.5px solid var(--indigo); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 12px; color: var(--indigo); margin-top: 2px;
+  }
+
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag-cloud + .tag-cloud { margin-top: 26px; }
+  .tag-pill {
+    font-family: var(--font-mono); font-size: 13px; padding: 6px 12px; border: 1px solid var(--line);
+    border-radius: 3px; color: var(--ink-soft); background: var(--paper-raised);
+  }
+
+  .link-card { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 17px 0; border-bottom: 1px solid var(--line); }
+  .link-card:last-child { border-bottom: none; }
+  .link-card-label { font-weight: 600; }
+  .link-card-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+  .link-card a { font-family: var(--font-mono); font-size: 14px; white-space: nowrap; padding: 10px 8px; margin: -10px -8px; }
+  .link-card a::after { content: ' \2197'; }
+
+  footer { padding: 36px 0 56px; }
+  footer p { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); text-align: center; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- PHOTO FRAMES ---------- */
+  .hero-layout { display: flex; gap: 32px; align-items: flex-start; }
+  .hero-text { flex: 1; min-width: 0; }
+  .hero-photo { flex-shrink: 0; width: 148px; }
+  .photo-frame {
+    border: 1px solid var(--line); background: var(--paper-raised);
+    padding: 6px; aspect-ratio: 3 / 4; overflow: hidden; position: relative;
+  }
+  .photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.15); }
+  .photo-placeholder {
+    width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 10px; font-family: var(--font-mono); font-size: 10px;
+    line-height: 1.5; color: var(--indigo); letter-spacing: 0.02em;
+    background-image: repeating-linear-gradient(135deg, var(--indigo-pale), var(--indigo-pale) 6px, var(--paper-raised) 6px, var(--paper-raised) 12px);
+  }
+  .photo-caption {
+    font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+    text-align: center; margin-top: 8px; letter-spacing: 0.03em;
+  }
+  @media (max-width: 640px) {
+    .hero-layout { flex-direction: column-reverse; }
+    .hero-photo { width: 108px; align-self: flex-start; }
+  }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 24px; }
+  .gallery-item { margin: 0; }
+  .gallery-frame {
+    border: 1px solid var(--line); background: var(--paper-raised); padding: 6px;
+    aspect-ratio: 4 / 3; overflow: hidden; position: relative;
+  }
+  .gallery-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .gallery-item figcaption {
+    font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);
+    margin: 10px 0 0; line-height: 1.5;
+  }
+  .gallery-item figcaption .exhibit-tag { color: var(--brass); font-weight: 600; margin-right: 6px; }
+  @media (max-width: 640px) { .gallery-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-fade">
+    <div class="hero-layout">
+      <div class="hero-text">
+        <span class="eyebrow">Portfolio — prepared for Nick</span>
+        <h1 class="hero-name">Nugroho &quot;Nugget&quot; Pangestu</h1>
+        <div class="hero-role">AI Workflow Director</div>
+        <div class="hero-subrole">Prompt Engineer · Multi-Agent Content Pipelines</div>
+        <div class="hero-meta">
+          Bali, Indonesia · <a href="mailto:nugrohopangestu85@gmail.com">nugrohopangestu85@gmail.com</a> · <a href="tel:+6281231312621">+62 812-3131-2621</a>
+        </div>
+        <p class="hero-thesis">I already run a small AI crew of my own — briefing agents, reviewing what comes back, catching what's off, and keeping the whole pipeline moving toward a deadline. I don't operate the tools by hand. I direct them.</p>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">Open the live app</a>
+          <a class="btn btn-ghost" href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">View the repository</a>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <img src="images/profile.jpg" alt="Foto Nugroho Pangestu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder" style="display:none;">taruh foto di<br>images/profile.jpg</div>
+        </div>
+        <div class="photo-caption">N. Pangestu</div>
+      </div>
+    </div>
+
+    <div class="verify-strip">
+      <div class="verify-item">
+        <span class="verify-num">4,330+</span>
+        <span class="verify-label">study cards shipped, across 3 products</span>
+      </div>
+      <div class="verify-item">
+        <span class="verify-num">3-for-3</span>
+        <span class="verify-label">real exam passes — me, then two mentees</span>
+      </div>
+      <div class="verify-item">
+        <span class="verify-num">0</span>
+        <span class="verify-label">lines hand-coded — I direct, agents build</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section id="flagship">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Flagship</span>
+        <h2>Nugget Nihongo / SSW Konstruksi</h2>
+      </div>
+      <div class="role-line"><strong>Founder &amp; Prompt Director</strong> · Apr 2026 – Present</div>
+      <p>A live Japanese-learning PWA for Indonesian workers preparing for Japan's Specified Skilled Worker (Konstruksi) exam. I directed the entire build — architecture, content, and QA — end-to-end, acting purely as prompt director rather than hands-on producer.</p>
+
+      <div class="stat-grid">
+        <div class="stat-box"><span class="n">1,438</span><span class="l">bilingual flashcards</span></div>
+        <div class="stat-box"><span class="n">1,075</span><span class="l">quiz &amp; exam-mockup Qs</span></div>
+        <div class="stat-box"><span class="n">23</span><span class="l">study modes</span></div>
+        <div class="stat-box"><span class="n">100%</span><span class="l">built via phone (Termux)</span></div>
+      </div>
+
+      <ul class="clean">
+        <li>Built on React 19 + Vite 6, with a spaced-repetition engine (ts-fsrs)</li>
+        <li>Run through a multi-agent relay workflow — each AI agent picks up its task from one shared handoff file, so work carries over cleanly between sessions instead of me re-explaining context every time</li>
+        <li>Standard practice: run the same brief across multiple AI agents and compare outputs before anything ships — the judgment-and-consistency layer, not the production layer</li>
+        <li>Directed entirely from a phone — no laptop, no formal programming background</li>
+      </ul>
+
+      <div class="proof-box">
+        <span class="tag">Proof of quality</span>
+        <p>I personally used the app to study for and pass the SSW Konstruksi Lifeline &amp; Peralatan exam module (Apr 2026). Since then, two junior candidates I've mentored also passed the same exam using an earlier, still-unfinished build — so the content has now held up under real exam conditions for three different people, not just the one who built it.</p>
+      </div>
+
+      <div class="version-flow">
+        <div class="version-node">
+          <span class="tag">Earlier build</span>
+          <span class="v">v87 — monolith</span>
+          <p class="vdesc">Rough, but it worked — this is the exact version my 2 juniors used to pass their exam.</p>
+          <span class="vlinks"><a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi-v87" target="_blank" rel="noopener">repo</a> · <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/" target="_blank" rel="noopener">live demo</a></span>
+        </div>
+        <div class="version-arrow">→</div>
+        <div class="version-node">
+          <span class="tag">Current build</span>
+          <span class="v">on develop — modular</span>
+          <p class="vdesc">Same pipeline, refactored — a full pass on content data quality and UI/UX.</p>
+          <span class="vlinks"><a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">repo</a> · <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">live demo</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Exhibit</span>
+        <h2>Screens from the build</h2>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item">
+          <div class="gallery-frame">
+            <img src="images/screenshot-1.png" alt="Screenshot proyek 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-placeholder" style="display:none;">images/screenshot-1.png</div>
+          </div>
+          <figcaption><span class="exhibit-tag">A —</span>ganti caption ini sesuai isi screenshot</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-frame">
+            <img src="images/screenshot-2.png" alt="Screenshot proyek 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-placeholder" style="display:none;">images/screenshot-2.png</div>
+          </div>
+          <figcaption><span class="exhibit-tag">B —</span>ganti caption ini sesuai isi screenshot</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-frame">
+            <img src="images/screenshot-3.png" alt="Screenshot proyek 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-placeholder" style="display:none;">images/screenshot-3.png</div>
+          </div>
+          <figcaption><span class="exhibit-tag">C —</span>ganti caption ini sesuai isi screenshot</figcaption>
+        </figure>
+        <figure class="gallery-item">
+          <div class="gallery-frame">
+            <img src="images/screenshot-4.png" alt="Screenshot proyek 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="photo-placeholder" style="display:none;">images/screenshot-4.png</div>
+          </div>
+          <figcaption><span class="exhibit-tag">D —</span>ganti caption ini sesuai isi screenshot</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="more-work">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Supporting work</span>
+        <h2>Same skill, different pipelines</h2>
+      </div>
+      <div class="work-grid">
+        <div class="work-card">
+          <h3>Multi-agent academic corpus</h3>
+          <p>Ran a 5-agent system — separate agents for integration, vocabulary, book indexing, grammar, and UI — to build a citation-backed research corpus and structured JLPT vocabulary sets, each following a strict schema I set and enforced.</p>
+          <div class="stat">~880+ sources, DOI-verified</div>
+        </div>
+        <div class="work-card">
+          <h3>JLPT N3 study tools</h3>
+          <p>Standalone apps built and QA'd the same way: a kanji drill app, a mimetic-word flashcard app, and a React practice app — directed and shipped solo.</p>
+          <div class="stat">358 entries, 17 categories</div>
+        </div>
+        <div class="work-card">
+          <h3>日本の文化 — Japanese Culture deck</h3>
+          <p>A 5-branch, 30-category cultural taxonomy — cuisine, history &amp; era, daily life, arts &amp; crafts, ritual &amp; spirituality. Every card carries example sentences and cultural notes, not just a translation pair.</p>
+          <div class="stat">1,031 cards</div>
+        </div>
+        <div class="work-card">
+          <h3>SSW Lifeline &amp; Infrastruktur deck</h3>
+          <p>A 4-branch, 32-category construction-industry taxonomy — site safety, tools &amp; technical, construction types, labor law &amp; qualifications — the exact terminology tested in the exam I passed.</p>
+          <div class="stat">1,861 cards</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Track record</span>
+        <h2>Relevant professional experience</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">Jul 2026 – Present</div>
+          <h3>Job Matching Assistant Intern — LPK TimeDoor Bali</h3>
+          <p>Daily communication with candidates and partner companies; keep documentation and interview scheduling consistent across multiple concurrent applicants.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">Dec 2020 – May 2023</div>
+          <h3>Manager — Cerita Hati Coffee &amp; Florist</h3>
+          <p>Led a team of 8; owned procurement, stock, cashier operations, and accounting for a café serving up to 300 customers/day across a 6-supplier network.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2024 – 2025</div>
+          <h3>F&amp;B Service, multiple roles</h3>
+          <p>Including main-course buffet service for 200–700 guests/day at a 5-star hotel under HACCP procedures — fast-paced, high-volume, deadline-driven work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-fit">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The match</span>
+        <h2>Why this fits</h2>
+      </div>
+      <ul class="fit-list">
+        <li><span class="fit-check">&#10003;</span><p>The role needs someone who <strong>directs</strong> AI tools, not someone who operates them by hand — that's the entire premise of everything above.</p></li>
+        <li><span class="fit-check">&#10003;</span><p>The role needs <strong>judgment and consistency</strong>, not filming/editing skills — I already run a compare-and-QA habit across AI agent outputs before anything ships.</p></li>
+        <li><span class="fit-check">&#10003;</span><p>Photography/cinematography background — a head start on directing an AI cinematographer with actual intention, not guessed prompts.</p></li>
+        <li><span class="fit-check">&#10003;</span><p>Comfortable being the single point of continuity across a fast-moving AI pipeline, including keeping non-technical stakeholders in the loop.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Toolkit</span>
+        <h2>Skills &amp; languages</h2>
+      </div>
+      <div class="tag-cloud">
+        <span class="tag-pill">AI Workflow Direction</span>
+        <span class="tag-pill">Prompt Engineering</span>
+        <span class="tag-pill">Multi-Agent Orchestration</span>
+        <span class="tag-pill">Content Pipeline Management</span>
+        <span class="tag-pill">Photography</span>
+        <span class="tag-pill">Cinematography</span>
+        <span class="tag-pill">Candidate &amp; Client Communication</span>
+        <span class="tag-pill">Leadership</span>
+        <span class="tag-pill">Cost Management</span>
+        <span class="tag-pill">Multitasking</span>
+      </div>
+      <div class="tag-cloud">
+        <span class="tag-pill">Indonesian — Native</span>
+        <span class="tag-pill">English — IELTS 6.5 equiv.</span>
+        <span class="tag-pill">Japanese — JFT A2 / N4 equiv.</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="links">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Verify everything</span>
+        <h2>Links</h2>
+      </div>
+
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Live app — current build</div>
+          <div class="link-card-sub">on-develop, modular · content DQ + UI/UX polish</div>
+        </div>
+        <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">GitHub — current build</div>
+          <div class="link-card-sub">nuggetenak/Nugget-Nihongo-SSW-Konstruksi</div>
+        </div>
+        <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Live app — v87</div>
+          <div class="link-card-sub">the earlier build my 2 juniors used to pass their exam</div>
+        </div>
+        <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">GitHub — v87</div>
+          <div class="link-card-sub">monolith codebase, kept as a standalone snapshot</div>
+        </div>
+        <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi-v87" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Email</div>
+          <div class="link-card-sub">nugrohopangestu85@gmail.com</div>
+        </div>
+        <a href="mailto:nugrohopangestu85@gmail.com">Write</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Phone</div>
+          <div class="link-card-sub">+62 812-3131-2621</div>
+        </div>
+        <a href="tel:+6281231312621">Call</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Prepared by Nugroho Pangestu — Bali, Indonesia — Aug 2026</p>
+  </div>
+</footer>
+
+</body>
+</html>
