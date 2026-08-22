@@ -1,6 +1,6 @@
 # Portfolio — Nugroho Pangestu
 
-Portofolio satu halaman (`index.html`), siap deploy ke GitHub Pages. Sudah ada slot foto profil + 4 slot screenshot proyek (kotak placeholder bergaris kalau file belum ada — bukan ikon broken image), plus section Exhibit kedua khusus build v87 (10 screenshot, A–J). Semua foto exhibit bisa diklik buat expand (lightbox, tutup pakai tombol × / klik luar / Esc).
+Portofolio satu halaman (`index.html`), siap deploy ke GitHub Pages. Sudah ada slot foto profil (kotak placeholder bergaris kalau file belum ada — bukan ikon broken image), plus dua section Exhibit: build v4.23.0 yang lagi aktif dikembangkan (8 screenshot, A–H) dan build v87 yang frozen — versi yang dipakai 2 junior lulus ujian (10 screenshot, A–J). Semua foto exhibit bisa diklik buat expand (lightbox, tutup pakai tombol × / klik luar / Esc).
 
 ## Struktur folder di repo
 
@@ -9,17 +9,17 @@ nuggetenak.github.io/
 ├── index.html
 └── images/
     ├── profile.jpg        ← foto kamu
-    ├── screenshot-1.png   ← screenshot proyek, current build (Exhibit A)
-    ├── screenshot-2.png   ← (Exhibit B)
-    ├── screenshot-3.png   ← (Exhibit C)
-    ├── screenshot-4.png   ← (Exhibit D)
+    ├── v423/               ← screenshot build v4.23.0 (Exhibit A–H, section id="gallery-v423")
+    │   ├── v423-01-beranda.jpg
+    │   ├── ...
+    │   └── v423-08-saya-progres.jpg
     └── v87/                ← screenshot build v87 (Exhibit A–J, section id="gallery-v87")
         ├── v87-01-belajar-overview.jpg
         ├── ...
         └── v87-10-progres.jpg
 ```
 
-Nama file di atas harus persis sama — kalau mau ganti nama, tinggal cari-ganti path-nya di `index.html` (cari `src="images/...`). Butuh lebih/kurang screenshot di section manapun? Blok `<figure class="gallery-item">...</figure>` di section `id="gallery"` (current build) atau `id="gallery-v87"` (build v87) tinggal copy-paste atau hapus — foto baru otomatis ikut kena fitur expand-to-lightbox, tidak perlu wiring tambahan.
+Nama file di atas harus persis sama — kalau mau ganti nama, tinggal cari-ganti path-nya di `index.html` (cari `src="images/...`). Butuh lebih/kurang screenshot di section manapun? Blok `<figure class="gallery-item">...</figure>` di section `id="gallery-v423"` (build v4.23.0) atau `id="gallery-v87"` (build v87) tinggal copy-paste atau hapus — foto baru otomatis ikut kena fitur expand-to-lightbox, tidak perlu wiring tambahan.
 
 ## Deploy ke GitHub Pages
 
@@ -31,7 +31,7 @@ Cek dulu: akun **nuggetenak** belum punya repo `nuggetenak.github.io` — nama i
    git clone https://github.com/nuggetenak/nuggetenak.github.io.git
    cd nuggetenak.github.io
    mkdir images
-   # taruh profile.jpg + screenshot-1..4.png ke folder images/ di sini
+   # taruh profile.jpg + folder v423/ + folder v87/ ke folder images/ di sini
    cp /path/ke/index.html .
    git add .
    git commit -m "portfolio v1"
