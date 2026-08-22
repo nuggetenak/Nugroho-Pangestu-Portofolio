@@ -27,6 +27,7 @@
     --max: 820px;
   }
 
+  html { scroll-behavior: smooth; scroll-padding-top: 76px; }
   * { box-sizing: border-box; }
 
   body {
@@ -37,6 +38,7 @@
     font-size: 16px;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    padding-top: 60px;
   }
 
   ::selection { background: var(--brass-light); color: var(--ink); }
@@ -65,7 +67,7 @@
   .eyebrow::before { content: ''; width: 16px; height: 1px; background: var(--indigo); display: inline-block; }
 
   /* ---------- HERO ---------- */
-  .hero { padding: 60px 0 44px; border-bottom: 1px solid var(--line); }
+  .hero { padding: 40px 0 44px; border-bottom: 1px solid var(--line); }
   .hero-name { font-size: clamp(38px, 8vw, 62px); line-height: 0.98; margin-top: 18px; }
   .hero-role {
     font-family: var(--font-display); font-weight: 600; font-size: clamp(17px, 3vw, 22px);
@@ -260,16 +262,93 @@
     display: flex; align-items: center; justify-content: center;
   }
   .lightbox-close:hover { background: rgba(22,35,46,0.9); }
+
+  /* ---------- NAV ---------- */
+  .topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+    background: rgba(247, 247, 244, 0.94);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+    transition: box-shadow 0.2s ease;
+  }
+  .topnav.is-scrolled { box-shadow: 0 8px 24px -14px rgba(22,35,46,0.35); }
+  .topnav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .topnav-mark {
+    font-family: var(--font-mono); font-weight: 600; font-size: 15px; color: var(--ink);
+    width: 34px; height: 34px; border: 1.5px solid var(--indigo); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .topnav-mark:hover { background: var(--indigo); color: #fff; }
+
+  .nav-links { display: flex; align-items: center; gap: 2px; }
+  .nav-link {
+    font-family: var(--font-mono); font-size: 13px; color: var(--ink-soft);
+    padding: 9px 13px; border-radius: 4px; position: relative; white-space: nowrap;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav-link:hover { color: var(--indigo); background: var(--indigo-pale); }
+  .nav-link.is-active { color: var(--indigo); }
+  .nav-link.is-active::after {
+    content: ''; position: absolute; left: 13px; right: 13px; bottom: 2px; height: 2px; background: var(--brass);
+  }
+  .nav-cta { border: 1px solid var(--indigo); color: var(--indigo); margin-left: 10px; }
+  .nav-cta:hover { background: var(--indigo); color: #fff; }
+  .nav-cta.is-active { color: var(--indigo); }
+  .nav-cta.is-active::after { display: none; }
+
+  .nav-toggle {
+    display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px;
+    width: 36px; height: 36px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper-raised);
+    cursor: pointer; padding: 0; flex-shrink: 0;
+  }
+  .nav-toggle span { display: block; width: 16px; height: 2px; background: var(--ink); transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  @media (max-width: 760px) {
+    .nav-toggle { display: flex; }
+    .nav-links {
+      position: fixed; top: 60px; left: 0; right: 0; z-index: 59;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--paper-raised); border-bottom: 1px solid var(--line);
+      padding: 8px; box-shadow: 0 12px 24px -16px rgba(22,35,46,0.3);
+      transform: translateY(-8px); opacity: 0; visibility: hidden;
+      transition: transform 0.18s ease, opacity 0.18s ease, visibility 0.18s;
+    }
+    .nav-links.is-open { transform: translateY(0); opacity: 1; visibility: visible; }
+    .nav-link { padding: 13px 14px; border-radius: 6px; }
+    .nav-link.is-active::after { display: none; }
+    .nav-cta { margin-left: 0; margin-top: 4px; text-align: center; }
+  }
 </style>
 </head>
 <body>
 
-<header class="hero">
+<nav class="topnav" id="topnav" aria-label="Primary">
+  <div class="wrap topnav-inner">
+    <a href="#top" class="topnav-mark" aria-label="Kembali ke atas">N</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu navigasi">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#flagship" class="nav-link" data-nav="flagship">Flagship</a>
+      <a href="#gallery-v423" class="nav-link" data-nav="gallery-v423 gallery-v87 gallery-bunka gallery-lifeline more-work">Exhibits</a>
+      <a href="#experience" class="nav-link" data-nav="experience">Experience</a>
+      <a href="#why-fit" class="nav-link" data-nav="why-fit">Fit</a>
+      <a href="#skills" class="nav-link" data-nav="skills">Skills</a>
+      <a href="#links" class="nav-link nav-cta" data-nav="links">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <div class="wrap hero-fade">
     <div class="hero-layout">
       <div class="hero-text">
         <span class="eyebrow">Portfolio — prepared for Nick</span>
-        <h1 class="hero-name">Nugroho &quot;Nugget&quot; Pangestu</h1>
+        <h1 class="hero-name">Nugroho Pangestu</h1>
         <div class="hero-role">AI Workflow Director</div>
         <div class="hero-subrole">Prompt Engineer · Multi-Agent Content Pipelines</div>
         <div class="hero-meta">
@@ -788,6 +867,59 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeLightbox();
   });
+})();
+</script>
+<script>
+(function () {
+  var nav = document.getElementById('topnav');
+  var toggle = document.getElementById('navToggle');
+  var navLinks = document.getElementById('navLinks');
+  var links = Array.prototype.slice.call(navLinks.querySelectorAll('.nav-link'));
+
+  toggle.addEventListener('click', function () {
+    var isOpen = navLinks.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  links.forEach(function (a) {
+    a.addEventListener('click', function () {
+      navLinks.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('is-scrolled', window.scrollY > 8);
+  }, { passive: true });
+
+  var idToLink = {};
+  links.forEach(function (a) {
+    (a.dataset.nav || '').split(' ').forEach(function (id) {
+      if (id) idToLink[id] = a;
+    });
+  });
+  var targets = Object.keys(idToLink)
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+
+  function setActive(link) {
+    links.forEach(function (l) {
+      l.classList.remove('is-active');
+      l.removeAttribute('aria-current');
+    });
+    if (link) {
+      link.classList.add('is-active');
+      link.setAttribute('aria-current', 'true');
+    }
+  }
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) setActive(idToLink[entry.target.id]);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+    targets.forEach(function (t) { spy.observe(t); });
+  }
 })();
 </script>
 </body>
