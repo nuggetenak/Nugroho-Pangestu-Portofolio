@@ -274,6 +274,31 @@
   }
   .lightbox-close:hover { background: rgba(22,35,46,0.9); }
 
+  .lightbox-nav {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 44px; height: 44px; border-radius: 50%;
+    border: 1px solid rgba(247,247,244,0.3); background: rgba(22,35,46,0.65); color: var(--paper);
+    font-family: var(--font-body); font-size: 26px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-nav:hover { background: rgba(22,35,46,0.9); }
+  .lightbox-prev { left: 18px; }
+  .lightbox-next { right: 18px; }
+
+  .lightbox-counter {
+    position: absolute; top: 18px; right: 72px; height: 44px;
+    display: flex; align-items: center; padding: 0 16px; border-radius: 22px;
+    font-family: var(--font-mono); font-size: 13px; color: var(--paper);
+    background: rgba(22,35,46,0.65); white-space: nowrap;
+  }
+  @media (max-width: 640px) {
+    .lightbox-nav { width: 38px; height: 38px; font-size: 21px; }
+    .lightbox-prev { left: 8px; }
+    .lightbox-next { right: 8px; }
+    .lightbox-counter { top: 14px; right: 60px; height: 38px; padding: 0 12px; font-size: 12px; }
+    .lightbox-close { top: 14px; right: 14px; width: 38px; height: 38px; }
+  }
+
   /* ---------- NAV ---------- */
   .topnav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 60;
@@ -823,17 +848,38 @@
   overlay.setAttribute('aria-hidden', 'true');
   overlay.innerHTML =
     '<button type="button" class="lightbox-close" aria-label="Tutup foto">&times;</button>' +
+    '<div class="lightbox-counter"></div>' +
+    '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Foto sebelumnya">&#8249;</button>' +
+    '<button type="button" class="lightbox-nav lightbox-next" aria-label="Foto berikutnya">&#8250;</button>' +
     '<img class="lightbox-img" alt="">';
   document.body.appendChild(overlay);
 
   var lbImg = overlay.querySelector('.lightbox-img');
   var lbClose = overlay.querySelector('.lightbox-close');
+  var lbPrev = overlay.querySelector('.lightbox-prev');
+  var lbNext = overlay.querySelector('.lightbox-next');
+  var lbCounter = overlay.querySelector('.lightbox-counter');
   var lastFocused = null;
+  var currentList = [];
+  var currentIndex = -1;
 
-  function openLightbox(src, alt) {
+  function showAt(index) {
+    if (!currentList.length) return;
+    currentIndex = (index + currentList.length) % currentList.length;
+    var img = currentList[currentIndex];
+    lbImg.src = img.currentSrc || img.src;
+    lbImg.alt = img.alt || '';
+    var multi = currentList.length > 1;
+    lbPrev.style.display = multi ? 'flex' : 'none';
+    lbNext.style.display = multi ? 'flex' : 'none';
+    lbCounter.style.display = multi ? 'flex' : 'none';
+    lbCounter.textContent = (currentIndex + 1) + ' / ' + currentList.length;
+  }
+
+  function openLightbox(list, index) {
     lastFocused = document.activeElement;
-    lbImg.src = src;
-    lbImg.alt = alt || '';
+    currentList = list;
+    showAt(index);
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
@@ -845,28 +891,37 @@
     overlay.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
     lbImg.src = '';
+    currentList = [];
+    currentIndex = -1;
     if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
   }
 
-  document.querySelectorAll('.gallery-frame').forEach(function (frame) {
-    var img = frame.querySelector('img');
-    if (!img) return;
-    frame.classList.add('is-clickable');
-    frame.setAttribute('tabindex', '0');
-    frame.setAttribute('role', 'button');
-    frame.setAttribute('aria-label', 'Perbesar foto');
+  document.querySelectorAll('.gallery-grid').forEach(function (grid) {
+    var frames = Array.prototype.slice.call(grid.querySelectorAll('.gallery-frame'));
 
-    function tryOpen() {
-      if (img.style.display === 'none') return; // placeholder lagi tampil, belum ada foto asli
-      openLightbox(img.currentSrc || img.src, img.alt);
-    }
+    frames.forEach(function (frame) {
+      var img = frame.querySelector('img');
+      if (!img) return;
+      frame.classList.add('is-clickable');
+      frame.setAttribute('tabindex', '0');
+      frame.setAttribute('role', 'button');
+      frame.setAttribute('aria-label', 'Perbesar foto');
 
-    frame.addEventListener('click', tryOpen);
-    frame.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        tryOpen();
+      function tryOpen() {
+        if (img.style.display === 'none') return; // placeholder lagi tampil, belum ada foto asli
+        var liveImgs = frames
+          .map(function (f) { return f.querySelector('img'); })
+          .filter(function (i) { return i && i.style.display !== 'none'; });
+        openLightbox(liveImgs, liveImgs.indexOf(img));
       }
+
+      frame.addEventListener('click', tryOpen);
+      frame.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          tryOpen();
+        }
+      });
     });
   });
 
@@ -874,8 +929,13 @@
     if (e.target === overlay) closeLightbox();
   });
   lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', function () { showAt(currentIndex - 1); });
+  lbNext.addEventListener('click', function () { showAt(currentIndex + 1); });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && overlay.classList.contains('is-open')) closeLightbox();
+    if (!overlay.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
+    else if (e.key === 'ArrowRight') showAt(currentIndex + 1);
   });
 })();
 </script>
