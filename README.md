@@ -1,43 +1,65 @@
 # Portfolio — Nugroho Pangestu
 
-Portofolio satu halaman (`index.html`), siap deploy ke GitHub Pages. Sudah ada slot foto profil (kotak placeholder bergaris kalau file belum ada — bukan ikon broken image), plus dua section Exhibit: build v4.23.0 yang lagi aktif dikembangkan (8 screenshot, A–H) dan build v87 yang frozen — versi yang dipakai 2 junior lulus ujian (10 screenshot, A–J). Semua foto exhibit bisa diklik buat expand (lightbox, tutup pakai tombol × / klik luar / Esc).
+Single-page portfolio site. **Live:** https://nuggetenak.github.io/Nugroho-Pangestu-Portofolio/
 
-## Struktur folder di repo
+One file — `index.html` — with HTML, CSS and JS all inline. No build step, no
+`package.json`, no framework, no dependencies. That simplicity is deliberate: keep it
+that way unless something genuinely can't be done without a bundler.
+
+## Structure
 
 ```
-nuggetenak.github.io/
-├── index.html
-└── images/
-    ├── profile.jpg        ← foto kamu
-    ├── v423/               ← screenshot build v4.23.0 (Exhibit A–H, section id="gallery-v423")
-    │   ├── v423-01-beranda.jpg
-    │   ├── ...
-    │   └── v423-08-saya-progres.jpg
-    └── v87/                ← screenshot build v87 (Exhibit A–J, section id="gallery-v87")
-        ├── v87-01-belajar-overview.jpg
-        ├── ...
-        └── v87-10-progres.jpg
+index.html                        ← the entire site
+assets/
+  Nugroho-Pangestu-Resume.pdf     ← generated — see assets/resume-src/README.md
+  resume-src/                     ← résumé source + ATS verification script
+icons/                            ← apple-touch-icon + 32/16px favicons
+images/
+  profile.jpg
+  v423/                           ← Exhibit A–H, current build   (section id="gallery-v423")
+  v87/                            ← Exhibit A–J, frozen build    (section id="gallery-v87")
+  bunka/                          ← Japanese culture deck        (section id="gallery-bunka")
+  lifeline/                       ← SSW infrastructure deck      (section id="gallery-lifeline")
 ```
 
-Nama file di atas harus persis sama — kalau mau ganti nama, tinggal cari-ganti path-nya di `index.html` (cari `src="images/...`). Butuh lebih/kurang screenshot di section manapun? Blok `<figure class="gallery-item">...</figure>` di section `id="gallery-v423"` (build v4.23.0) atau `id="gallery-v87"` (build v87) tinggal copy-paste atau hapus — foto baru otomatis ikut kena fitur expand-to-lightbox, tidak perlu wiring tambahan.
+Exhibit screenshots are served as WebP via `<picture>` with the original JPEG as fallback.
+Naming convention for new screenshots: `images/README.md`.
 
-## Deploy ke GitHub Pages
+## Editing
 
-Cek dulu: akun **nuggetenak** belum punya repo `nuggetenak.github.io` — nama ini yang bikin URL-nya bersih (`https://nuggetenak.github.io/`, tanpa embel-embel nama repo).
+**Screenshots.** Copy or delete a `<figure class="gallery-item">` block inside the relevant
+`gallery-*` section. New images pick up the click-to-expand lightbox automatically — no extra
+wiring. If a file is missing, a striped placeholder renders in its slot rather than a broken
+image icon.
 
-1. Buat repo baru di GitHub, nama persis: `nuggetenak.github.io`
-2. Dari Termux:
-   ```bash
-   git clone https://github.com/nuggetenak/nuggetenak.github.io.git
-   cd nuggetenak.github.io
-   mkdir images
-   # taruh profile.jpg + folder v423/ + folder v87/ ke folder images/ di sini
-   cp /path/ke/index.html .
-   git add .
-   git commit -m "portfolio v1"
-   git push
-   ```
-   (Belum ada foto/screenshot? Push aja dulu tanpa isi folder `images/` — placeholder-nya tetap tampil rapi. Tinggal `git add images/*.jpg images/*.png && git commit -m "add photos" && git push` kapan pun file siap.)
-3. Settings → Pages di repo itu → pastikan **Source: Deploy from branch: main / (root)**. Situs live dalam 1-2 menit di `https://nuggetenak.github.io/`.
+**Résumé.** Don't edit the PDF. Edit `assets/resume-src/resume.html` and re-render — the
+rebuild and verification steps are in `assets/resume-src/README.md`.
 
-Alternatif tanpa terminal: buat repo di atas lewat browser, klik **Add file → Upload files**, drag `index.html` + folder `images/` langsung dari HP.
+**Anything else.** Read `HANDOFF.md` first. It carries the working protocol and the current
+state of the site.
+
+## Verifying a change
+
+There's no build and no test suite, so verification is manual and non-optional:
+
+```bash
+# 1. every referenced asset actually exists on disk
+grep -oE '(src|href|srcset)="[^"h][^"]*"' index.html | cut -d'"' -f2 | sort -u | \
+  while read -r f; do [ -e "$f" ] || echo "MISSING: $f"; done
+
+# 2. both inline <script> blocks still parse
+node --check <(sed -n '/<script>/,/<\/script>/p' index.html | sed '/<\/*script>/d')
+```
+
+## Deploying
+
+GitHub Pages is already configured — **Settings → Pages → Deploy from branch: `main` / `(root)`**.
+Pushing to `main` publishes; the site is live a minute or two later.
+
+```bash
+git add .
+git commit -m "describe the change"
+git push
+```
+
+No terminal handy? **Add file → Upload files** in the GitHub web UI works from a phone browser.
