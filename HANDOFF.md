@@ -1,13 +1,13 @@
 # HANDOFF.md — Nugroho-Pangestu-Portofolio
 
-> ## 🟢 Session 4 done — résumé drift resolved, site polish shipped — 2026-08-24
-> The résumé PDF session 3 shipped had drifted into a designed layout; the owner wanted
-> **ATS / Kinobi style**. Rebuilt and re-shipped, with the source now committed so it can't
-> silently drift again. Plus: Termux references removed (owner request), UI strings made
-> English-only, a11y and metadata pass.
+> ## 🟢 Session 5 done — restructured around the real project hierarchy — 2026-08-24
+> The owner corrected a structural misrepresentation: **Nugget Nihongo is the platform**;
+> SSW Konstruksi, the Anki Deck Series and future SSW tracks are all *inside* it. The site
+> and résumé had SSW Konstruksi as the top-level flagship. Both rebuilt around the correct
+> hierarchy. Corpus and platform figures re-counted from the repo — the old ones were wrong.
 >
-> **🔵 Open — needs the owner, not an agent.** Four copy questions in ACTIVE TASKS below.
-> Nothing mechanical is outstanding.
+> **🔵 One open item** in ACTIVE TASKS: the Doc.Mentation date range needs the owner to
+> confirm. Everything else is shipped.
 
 ---
 
@@ -69,94 +69,98 @@ Then: PROTOCOL section below, first.
 
 ---
 
-## CURRENT STATE (2026-08-24, end of session 4)
+## CURRENT STATE (2026-08-24, end of session 5)
 
-**Résumé — rebuilt to the ATS/Kinobi standard** (`2a66595`)
+**Project hierarchy — this is the thing to get right** (`21b1757`)
 
-- Session 3's PDF had drifted: Big Shoulders display face for the name, IBM Plex Mono for
-  dates, bordered pills for all 16 skills, and a 3-column languages block. Multi-column blocks
-  break ATS parse order and decorative faces hurt text extraction — the owner wanted ATS/Kinobi
-  and this wasn't it.
-- Now: single column, one font (Carlito, Calibri-metric), monochrome, plain `•` bullets,
-  standard headings, one A4 page, no images/tables. 22 KB, fonts embedded + subsetted with
-  unicode maps.
-- **Content was kept, not reverted** — session 3's two edits were correct and stayed (portfolio
-  URL in the contact line; the exam bullet covering the 2 mentees + v87). One bullet was added
-  covering the supporting decks and research corpus the site already exhibits.
-- `assets/resume-src/` now holds `resume.html`, `ats_check.py` and a README with the design
-  contract and rebuild steps. Session 3 shipped a binary PDF with no source, which is what let
-  the drift go unnoticed — that gap is closed.
-- `ats_check.py` catches a subtle real failure: a hyphenated compound landing at a line break
-  gets its hyphen dropped by PDF text extractors, so an ATS reads `multiagent`. It caught two
-  live cases; both reworded. **Re-run it after any content edit** — reflow can break a
-  different compound.
+```
+Nugget Nihongo ................. the platform. PAUSED Apr 2026.
+├── SSW Konstruksi ............. LIVE. 3 exam passes. The track that shipped.
+├── Anki Deck Series ........... 2 SHIPPED (1,861-card SSW infra, 1,031-card bunka)
+└── Further SSW tracks ......... ROADMAP
+```
 
-**Site polish**
+Sessions 1–4 all treated SSW Konstruksi as the top-level project and the decks and corpus as
+unrelated side work. That was wrong and the owner corrected it. `#flagship` is now the
+platform with a system map; `#ssw` is a separate section for the track. SSW stays high on the
+page on purpose — it's the node with verifiable proof — but it is no longer presented as the
+parent.
 
-- Termux removed at the owner's request — flagship stat box now reads "built from a phone, no
-  laptop" (same claim, no tool name). `README.md` also rewrote: it had documented deploying to
-  `nuggetenak.github.io`, a repo that isn't this one and was never created, and its folder map
-  predated `assets/`, `icons/`, `bunka/` and `lifeline/`. (`b1b601b`)
-- English-only UI. Seven strings were still Indonesian on a `lang="en"` page aimed at an
-  English-speaking recruiter. All 24 gallery placeholders also printed their own file path as
-  user-facing copy — if an image 404s the visitor reads `images/v423/v423-01-beranda.jpg`. Now
-  "Screenshot unavailable". (`acd84db`)
-- A11y: skip link (34 gallery images sat between nav and content), Tab focus trap in the
-  lightbox (it saved/restored focus already, but Tab escaped the open dialog onto links behind
-  the overlay), and per-section `aria-label`s. (`acd84db`)
-- Canonical URL, `theme-color`, and a schema.org Person block — every field already stated on
-  the page, nothing new asserted. (`46a4fa4`)
+**Verified figures — do not re-guess these** (all counted from the repo, session 5)
 
-**Carried from earlier sessions** (all still live and untouched):
+| Figure | Value | Source of truth |
+|---|---|---|
+| Research corpus | **747** entries, 43 clusters, ~45% DOI | `corpus/v17-pass15` → `corpus/bibliography/MASTER-BIBLIOGRAPHY-FINAL.md`, STATISTICS table, v7 / 17 Apr 2026 |
+| Platform vocabulary | **2,692** | `public/data/vocab/vocab-n*.js` generated headers |
+| Platform grammar | **859** | `public/data/grammar/grammar-n*.js` generated headers |
+| Project start | **Feb 2026** | repo starts 22 Mar 2026 but already at v14.27.2 — earlier history predates this repo |
+| Freeze date | **23 Apr 2026** | last commit on `origin/develop` |
 
-- `@media print` pass — hides `.topnav`/`.cta-row`/lightbox, `break-inside: avoid` on card
-  grids, for the case Nick prints the page instead of the PDF. (`11a806e`)
-- Lightbox prev/next + arrow keys + "N / total" counter, scoped per `.gallery-grid`. (`d6f688d`)
-- 22 of 24 exhibit screenshots served as WebP via `<picture>` with `.jpg` fallback (v87-06/07
-  were already `.webp`) — 5.1 MB → 2.3 MB. `onerror` walks up through `this.parentElement` to
-  reach the placeholder `<div>`. (`3603800`)
-- Descriptive alt text on all v423/v87 exhibits. (`d96285a`)
-- `icons/`: apple-touch-icon-180, favicon-32, favicon-16 — indigo `#2b5580` rounded-rect "N" in
-  IBM Plex Mono Bold. The inline SVG favicon `<link>` still loads first. (`cdd2828`)
-- Visit tracker: dismissed by the owner. Don't re-suggest unless they raise it.
-- No build step, no tests, no lint. Verification = the two commands in `README.md`, run after
-  every task, not just at the end.
+Numbers that were circulating and are **wrong**: 880 sources (overclaim), 736 (stale — that's
+the live site's copy, which is a v15.7.0 build behind the v7 bibliography), 763 (owner's
+recollection), "1,800+ vocab / 450+ grammar" (stale README on nugget-nihongo).
+
+**"DOI-verified" was an overclaim.** The corpus card and résumé both described the corpus as
+DOI-verified. Only ~336 of 747 entries (45%) carry a DOI and 42 verifications are pending.
+Now stated as measured. Don't let this regress — it's the kind of claim that collapses in an
+interview.
+
+**The paused platform is linked, deliberately.** The owner chose to show it honestly rather
+than hide it. Its interface is complete and clickable but it stopped mid content-database
+migration, so every list reads zero. The `.heads-up` block in `#flagship` and the link-card
+sub-text both warn about this before anyone clicks. **Do not remove those warnings** — an
+unlabelled link to an app that appears empty is worse than no link.
+
+**Résumé — now two pages** (`21b1757`)
+
+- Still the ATS/Kinobi contract in `assets/resume-src/README.md`. Unchanged constraints.
+- Two pages because content grew (platform parent entry, Doc.Mentation, expanded tools). Type
+  relaxed from 9.35pt/1.27 to 10pt/1.38 — a two-page CV has no reason to be cramped.
+- `h2 { break-after: avoid }` and `.entry/.edu/.kv { break-inside: avoid }` added so the break
+  lands at a section boundary. It currently falls before EDUCATION. **If you edit content,
+  check where the break moves** — a section splitting mid-list looks careless.
+- `ats_check.py` caught `exam-mockup` parsing as `exammockup`; reworded. Re-run after any edit.
+
+**Site polish carried from session 4** (all still live): Termux removed, English-only UI
+strings, skip link, lightbox focus trap, per-section `aria-label`s, canonical, `theme-color`,
+Person schema, `@media print`, WebP via `<picture>`, `icons/`.
 
 ---
 
 ## ACTIVE TASKS
 
-Nothing mechanical is open. These four are copy decisions — **ask the owner, don't guess**
-(protocol #1). They were raised at the end of session 4 and not yet answered.
+- [ ] 🔵 **Confirm the Doc.Mentation date range.** Currently `2019 – 2021` on both the CV and
+  the timeline. The owner first said "from SMA (2017) until graduating 2020", then corrected
+  his schooling to SMA 2019–2021 — which makes the videography dates ambiguous between
+  *2017–2020* (the years as he first recalled them) and *2019–2021* (SMA start to graduation,
+  following the correction). 2019–2021 was used because he framed the period by his schooling.
+  **One number, needs his word.** Note it overlaps Cerita Hati (12/2020–05/2023), which is
+  plausible but worth him seeing.
 
-- [ ] 🔵 **Availability line.** The target role is part-time, on-site in Canggu, Mon–Fri
-  1pm–6pm. The site says "Bali, Indonesia" but never confirms the schedule works. A one-line
-  answer near the hero CTAs removes the recruiter's most obvious open question. Needs the
-  owner's actual availability — don't invent a commitment.
+- [ ] 🔵 **Owner to check both Instagram accounts are public** and read well top-to-bottom.
+  `@nugroho_pangestu__` is personal-account-shaped; a recruiter will scroll all of it.
+  `@doc.mentation` is the stronger link — it's actual portfolio work. Instagram blocks
+  automated access so neither could be verified from here.
 
-- [ ] 🔵 **Name the role.** The hero eyebrow says "Portfolio — prepared for Nick"; nothing
-  names the position. Making it explicit sharpens the framing, but only if the owner is sending
-  this link to exactly one recruiter and doesn't want to reuse it elsewhere. Ask first.
+- [ ] 🔵 **Availability line.** Still open from session 4. The role is part-time, on-site
+  Canggu, Mon–Fri 1pm–6pm. The site says "Bali, Indonesia" but never confirms the schedule
+  works. Needs the owner's actual availability — don't invent a commitment.
 
-- [ ] 🔵 **Résumé length vs. relevance.** Two one-month F&B part-times (Pangeran Riverside,
-  Omah Kopi) take a bullet each on a one-page CV aimed at an AI/marketing role. Cutting them
-  frees room; keeping them preserves an unbroken chronology. Owner's call — do not delete work
-  history unilaterally.
-
-- [ ] 🔵 **Education dates.** CV lists SMA Negeri 1 Lumajang as 2019–2021 — two years, where
-  Indonesian SMA is normally three. May well be correct (acceleration, transfer); flagged
-  because a recruiter may read it as a typo. Left exactly as the owner supplied it.
+- [ ] 🔵 **Name the role.** Also from session 4. The hero says "prepared for Nick" but never
+  names the position. Sharper if named, but only if this link isn't being reused elsewhere.
 
 <details>
-<summary>Closed tasks (sessions 3–4)</summary>
+<summary>Closed tasks (sessions 3–5)</summary>
 
-- [x] **Résumé design drift → ATS/Kinobi.** Shipped session 4, `2a66595`. See CURRENT STATE.
-- [x] **Remove "Termux".** Shipped session 4, `b1b601b`. Two occurrences, both gone; `grep -ri
-  termux` is clean.
-- [x] **Downloadable résumé PDF.** Shipped session 3, `11a806e`. Design later corrected in
-  session 4; the link/CTA/print wiring from session 3 was correct and untouched.
-- [x] **Visit tracker (e.g. GoatCounter).** Dismissed by the owner — "I don't think it's
-  needed." Don't re-suggest unless they bring it up again.
+- [x] **Project hierarchy misrepresented.** Fixed session 5, `21b1757`.
+- [x] **Corpus / platform figures wrong.** Re-counted session 5. See table above.
+- [x] **Add Doc.Mentation, Instagram, videography.** Shipped session 5.
+- [x] **Education dates.** Owner confirmed the CV was already right — SMP 2016–2019, SMA
+  2019–2021. Closed, don't re-flag.
+- [x] **Résumé design drift → ATS/Kinobi.** Session 4, `2a66595`.
+- [x] **Remove "Termux".** Session 4, `b1b601b`. `grep -ri termux` is clean.
+- [x] **Downloadable résumé PDF.** Session 3, `11a806e`.
+- [x] **Visit tracker.** Dismissed by the owner. Don't re-suggest.
 
 </details>
 
