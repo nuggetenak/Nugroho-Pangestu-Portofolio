@@ -212,6 +212,15 @@
     * { animation: none !important; transition: none !important; }
   }
 
+  @media print {
+    .topnav, .cta-row, .lightbox-overlay, .gallery-frame.is-clickable::after { display: none !important; }
+    body { font-size: 11pt; }
+    a { color: var(--ink) !important; text-decoration: underline; }
+    section { break-inside: avoid; padding: 18px 0; }
+    .hero { padding-top: 8px; }
+    .work-grid, .stat-grid, .shot-grid { break-inside: avoid; }
+  }
+
   /* ---------- PHOTO FRAMES ---------- */
   .hero-layout { display: flex; gap: 32px; align-items: flex-start; }
   .hero-text { flex: 1; min-width: 0; }
@@ -398,6 +407,7 @@
         <div class="cta-row">
           <a class="btn btn-primary" href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">Open the live app</a>
           <a class="btn btn-ghost" href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">View the repository</a>
+          <a class="btn btn-ghost" href="assets/Nugroho-Pangestu-Resume.pdf" download>Download résumé (PDF)</a>
         </div>
       </div>
       <div class="hero-photo">
@@ -855,6 +865,13 @@
         <h2>Links</h2>
       </div>
 
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Résumé — PDF</div>
+          <div class="link-card-sub">one page, updated to match this portfolio</div>
+        </div>
+        <a href="assets/Nugroho-Pangestu-Resume.pdf" download>Download</a>
+      </div>
       <div class="link-card">
         <div>
           <div class="link-card-label">Live app — v4.23.0</div>
