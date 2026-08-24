@@ -225,11 +225,88 @@
 
   @media print {
     .topnav, .cta-row, .lightbox-overlay, .gallery-frame.is-clickable::after { display: none !important; }
+    .link-row-actions a { border: none !important; padding: 0 !important; background: none !important; }
+    .link-block, .contact-block { break-inside: avoid; }
     body { font-size: 11pt; }
     a { color: var(--ink) !important; text-decoration: underline; }
     section { break-inside: avoid; padding: 18px 0; }
     .hero { padding-top: 8px; }
     .work-grid, .stat-grid, .shot-grid { break-inside: avoid; }
+  }
+
+  /* ---------- CONTACT BLOCK ---------- */
+  .contact-block {
+    border: 1px solid var(--line); background: var(--paper-raised);
+    padding: 22px 24px; margin-bottom: 34px;
+  }
+  .contact-primary { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .contact-item { display: block; padding: 4px 0; }
+  .contact-kind {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted); display: block; margin-bottom: 5px;
+  }
+  .contact-value {
+    font-family: var(--font-display); font-weight: 700; font-size: 18px;
+    color: var(--indigo); display: block; line-height: 1.25; word-break: break-word;
+  }
+  .contact-item:hover .contact-value { color: var(--indigo-deep); text-decoration: underline; }
+  .contact-availability {
+    font-size: 14px; margin: 20px 0 0; padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  @media (max-width: 560px) { .contact-primary { grid-template-columns: 1fr; gap: 16px; } }
+
+  /* ---------- LINK BLOCKS ---------- */
+  .link-block { margin-top: 30px; }
+  .link-block-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--indigo);
+    display: block; padding-bottom: 9px; border-bottom: 1px solid var(--line);
+  }
+  .link-row {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 20px; padding: 15px 0; border-bottom: 1px solid var(--line);
+  }
+  .link-row-text { min-width: 0; }
+  .link-row-name {
+    display: block; font-weight: 600; font-size: 15px; color: var(--ink); line-height: 1.35;
+  }
+  .link-row-sub {
+    display: block; font-size: 13px; color: var(--text-muted);
+    line-height: 1.55; margin-top: 4px;
+  }
+  .link-row-sub code {
+    font-family: var(--font-mono); font-size: 12px;
+    background: var(--indigo-pale); padding: 1px 5px; border-radius: 2px;
+  }
+  .link-row-actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .link-row-actions a {
+    font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.03em;
+    padding: 7px 13px; border: 1px solid var(--line); border-radius: 3px;
+    white-space: nowrap; background: var(--paper-raised); transition: all 0.15s ease;
+  }
+  .link-row-actions a:hover {
+    border-color: var(--indigo); background: var(--indigo); color: var(--paper);
+  }
+  .link-row-actions a::after { content: ' \2197'; opacity: 0.6; }
+  @media (max-width: 560px) {
+    .link-row { flex-direction: column; gap: 12px; }
+    .link-row-actions { width: 100%; }
+    .link-row-actions a { flex: 1; text-align: center; }
+  }
+
+  /* ---------- SKILL GROUPS ---------- */
+  .skill-group { margin-top: 20px; }
+  .skill-group:first-of-type { margin-top: 0; }
+  .skill-label {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted);
+    display: block; margin-bottom: 9px;
+  }
+  .tag-pill.is-basic { color: var(--text-muted); }
+  .tag-pill.is-basic em {
+    font-style: normal; font-size: 10px; letter-spacing: 0.06em;
+    text-transform: uppercase; opacity: 0.7; margin-left: 5px;
   }
 
   /* ---------- SYSTEM MAP ---------- */
@@ -493,8 +570,8 @@
         <span class="verify-label">study cards shipped, across 3 products</span>
       </div>
       <div class="verify-item">
-        <span class="verify-num">3-for-3</span>
-        <span class="verify-label">real exam passes — me, then two mentees</span>
+        <span class="verify-num">4-for-4</span>
+        <span class="verify-label">real exam passes — me, then three juniors I mentored</span>
       </div>
       <div class="verify-item">
         <span class="verify-num">0</span>
@@ -529,7 +606,7 @@
           <div class="sys-node">
             <div class="sys-head">
               <span class="sys-name">SSW Konstruksi</span>
-              <span class="sys-status is-live">Live · 3 exam passes</span>
+              <span class="sys-status is-live">Live · 4 exam passes</span>
             </div>
             <p class="sys-desc">The exam-preparation track, and the one I concentrated on. 1,438 bilingual flashcards plus 1,075 quiz, exam-mockup and simulation questions. Detailed below.</p>
           </div>
@@ -581,14 +658,14 @@
 
       <div class="proof-box">
         <span class="tag">Proof of quality</span>
-        <p>I personally used the app to study for and pass the SSW Konstruksi Lifeline &amp; Peralatan exam module (27 Apr 2026). Two junior candidates I've mentored passed the same exam on 20 Aug 2026, studying from that same v87 build — so the content has now held up under real exam conditions for three different people, across two sittings four months apart, not just the one who built it.</p>
+        <p>I used the app to study for and pass the SSW Konstruksi Lifeline &amp; Peralatan exam module myself on 27 Apr 2026. Three junior candidates I've mentored have since passed the same exam on that same v87 build — two on 20 Aug 2026 and a third on 24 Aug 2026. Four people, three separate sittings, four months apart, on content none of them wrote. It holds up away from its author.</p>
       </div>
 
       <div class="version-flow">
         <div class="version-node">
           <span class="tag">Earlier build</span>
           <span class="v">v87 — monolith</span>
-          <p class="vdesc">Rough, but it worked — this is the exact version my 2 juniors used to pass their exam.</p>
+          <p class="vdesc">Rough, but it worked — this is the exact version all 3 of my juniors passed their exam on.</p>
           <span class="vlinks"><a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi-v87" target="_blank" rel="noopener">repo</a> · <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/" target="_blank" rel="noopener">live demo</a></span>
         </div>
         <div class="version-arrow">→</div>
@@ -698,7 +775,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Exhibit — v87 snapshot</span>
-        <h2>The monolith my 2 juniors passed with</h2>
+        <h2>The monolith my 3 juniors passed with</h2>
       </div>
       <div class="role-line">Kept as a frozen snapshot, unedited since the exam — these are the actual v87 screens.</div>
       <div class="gallery-grid">
@@ -962,22 +1039,56 @@
         <span class="eyebrow">Toolkit</span>
         <h2>Skills &amp; languages</h2>
       </div>
-      <div class="tag-cloud">
-        <span class="tag-pill">AI Workflow Direction</span>
-        <span class="tag-pill">Prompt Engineering</span>
-        <span class="tag-pill">Multi-Agent Orchestration</span>
-        <span class="tag-pill">Content Pipeline Management</span>
-        <span class="tag-pill">Photography</span>
-        <span class="tag-pill">Cinematography</span>
-        <span class="tag-pill">Candidate &amp; Client Communication</span>
-        <span class="tag-pill">Leadership</span>
-        <span class="tag-pill">Cost Management</span>
-        <span class="tag-pill">Multitasking</span>
+      <div class="skill-group">
+        <span class="skill-label">Direction</span>
+        <div class="tag-cloud">
+          <span class="tag-pill">AI Workflow Direction</span>
+          <span class="tag-pill">Prompt Engineering</span>
+          <span class="tag-pill">Multi-Agent Orchestration</span>
+          <span class="tag-pill">Content Pipeline Management</span>
+          <span class="tag-pill">Quality Assurance</span>
+        </div>
       </div>
-      <div class="tag-cloud">
-        <span class="tag-pill">Indonesian — Native</span>
-        <span class="tag-pill">English — IELTS 6.5 equiv.</span>
-        <span class="tag-pill">Japanese — JFT A2 / N4 equiv.</span>
+      <div class="skill-group">
+        <span class="skill-label">Visual</span>
+        <div class="tag-cloud">
+          <span class="tag-pill">Photography</span>
+          <span class="tag-pill">Cinematography</span>
+          <span class="tag-pill">Videography</span>
+          <span class="tag-pill">Visual Direction</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-label">People &amp; operations</span>
+        <div class="tag-cloud">
+          <span class="tag-pill">Candidate &amp; Client Communication</span>
+          <span class="tag-pill">Leadership</span>
+          <span class="tag-pill">Cost Management</span>
+          <span class="tag-pill">Stock Management</span>
+          <span class="tag-pill">Multitasking</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-label">Tools</span>
+        <div class="tag-cloud">
+          <span class="tag-pill">Claude</span>
+          <span class="tag-pill">ChatGPT</span>
+          <span class="tag-pill">Gemini</span>
+          <span class="tag-pill">Google Workspace</span>
+          <span class="tag-pill">Canva</span>
+          <span class="tag-pill">Microsoft Office</span>
+          <span class="tag-pill is-basic">Premiere Pro <em>basic</em></span>
+          <span class="tag-pill is-basic">After Effects <em>basic</em></span>
+          <span class="tag-pill is-basic">Lightroom <em>basic</em></span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <span class="skill-label">Languages</span>
+        <div class="tag-cloud">
+          <span class="tag-pill">Indonesian — Native</span>
+          <span class="tag-pill">English — IELTS 6.5 equiv.</span>
+          <span class="tag-pill">Japanese — JFT A2 / N4 equiv.</span>
+        </div>
       </div>
     </div>
   </section>
@@ -989,82 +1100,91 @@
         <h2>Links</h2>
       </div>
 
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Résumé — PDF</div>
-          <div class="link-card-sub">one page, ATS-friendly, matches this portfolio</div>
+      <div class="contact-block">
+        <div class="contact-primary">
+          <a class="contact-item" href="mailto:nugrohopangestu85@gmail.com">
+            <span class="contact-kind">Email</span>
+            <span class="contact-value">nugrohopangestu85@gmail.com</span>
+          </a>
+          <a class="contact-item" href="tel:+6281231312621">
+            <span class="contact-kind">Phone / WhatsApp</span>
+            <span class="contact-value">+62 812-3131-2621</span>
+          </a>
         </div>
-        <a href="assets/Nugroho-Pangestu-Resume.pdf" download>Download</a>
+        <p class="contact-availability"><strong>Available for the advertised schedule</strong> — Monday to Friday, 1pm to 6pm, on-site in Canggu. Based in Bali, no relocation needed.</p>
       </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Instagram — photography &amp; cinematography</div>
-          <div class="link-card-sub">@nugroho_pangestu__</div>
+
+      <div class="link-block">
+        <span class="link-block-label">Résumé</span>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">Nugroho Pangestu — Résumé</span>
+            <span class="link-row-sub">Two pages · ATS-friendly · matches this portfolio</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="assets/Nugroho-Pangestu-Resume.pdf" download>Download PDF</a>
+          </div>
         </div>
-        <a href="https://www.instagram.com/nugroho_pangestu__" target="_blank" rel="noopener">Open</a>
       </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Instagram — Doc.Mentation</div>
-          <div class="link-card-sub">the videography brand I co-ran, 2019–2021</div>
+
+      <div class="link-block">
+        <span class="link-block-label">The platform</span>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">Nugget Nihongo</span>
+            <span class="link-row-sub">Paused Apr 2026 — interface complete, content lists read zero. Research corpus on branch <code>corpus/v17-pass15</code>.</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="https://nugget-nihongo.pages.dev/" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/nuggetenak/nugget-nihongo" target="_blank" rel="noopener">Repo</a>
+          </div>
         </div>
-        <a href="https://www.instagram.com/doc.mentation" target="_blank" rel="noopener">Open</a>
       </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Nugget Nihongo — the platform</div>
-          <div class="link-card-sub">paused Apr 2026 · interface complete, content lists read zero</div>
+
+      <div class="link-block">
+        <span class="link-block-label">SSW Konstruksi — the shipped track</span>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">v4.23.0 — current build</span>
+            <span class="link-row-sub">Modular refactor, in active development · content DQ + UI/UX polish</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">Repo</a>
+          </div>
         </div>
-        <a href="https://nugget-nihongo.pages.dev/" target="_blank" rel="noopener">Open</a>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">v87 — the build the exams were passed on</span>
+            <span class="link-row-sub">Monolith codebase, frozen as a standalone snapshot. All three juniors studied from this one.</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/" target="_blank" rel="noopener">Live</a>
+            <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi-v87" target="_blank" rel="noopener">Repo</a>
+          </div>
+        </div>
       </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">GitHub — Nugget Nihongo</div>
-          <div class="link-card-sub">nuggetenak/nugget-nihongo · corpus on branch corpus/v17-pass15</div>
+
+      <div class="link-block">
+        <span class="link-block-label">Visual work</span>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">Doc.Mentation</span>
+            <span class="link-row-sub">The two-person videography brand I co-ran, 2019–2021 — client and event work</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="https://www.instagram.com/doc.mentation" target="_blank" rel="noopener">Instagram</a>
+          </div>
         </div>
-        <a href="https://github.com/nuggetenak/nugget-nihongo" target="_blank" rel="noopener">Open</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Live app — v4.23.0</div>
-          <div class="link-card-sub">on-develop, modular · content DQ + UI/UX polish</div>
+        <div class="link-row">
+          <div class="link-row-text">
+            <span class="link-row-name">Personal account</span>
+            <span class="link-row-sub">@nugroho_pangestu__</span>
+          </div>
+          <div class="link-row-actions">
+            <a href="https://www.instagram.com/nugroho_pangestu__" target="_blank" rel="noopener">Instagram</a>
+          </div>
         </div>
-        <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi/" target="_blank" rel="noopener">Open</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">GitHub — v4.23.0</div>
-          <div class="link-card-sub">nuggetenak/Nugget-Nihongo-SSW-Konstruksi</div>
-        </div>
-        <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi" target="_blank" rel="noopener">Open</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Live app — v87</div>
-          <div class="link-card-sub">the earlier build my 2 juniors used to pass their exam</div>
-        </div>
-        <a href="https://nuggetenak.github.io/Nugget-Nihongo-SSW-Konstruksi-v87/" target="_blank" rel="noopener">Open</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">GitHub — v87</div>
-          <div class="link-card-sub">monolith codebase, kept as a standalone snapshot</div>
-        </div>
-        <a href="https://github.com/nuggetenak/Nugget-Nihongo-SSW-Konstruksi-v87" target="_blank" rel="noopener">Open</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Email</div>
-          <div class="link-card-sub">nugrohopangestu85@gmail.com</div>
-        </div>
-        <a href="mailto:nugrohopangestu85@gmail.com">Write</a>
-      </div>
-      <div class="link-card">
-        <div>
-          <div class="link-card-label">Phone</div>
-          <div class="link-card-sub">+62 812-3131-2621</div>
-        </div>
-        <a href="tel:+6281231312621">Call</a>
       </div>
     </div>
   </section>
