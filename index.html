@@ -232,6 +232,42 @@
     .work-grid, .stat-grid, .shot-grid { break-inside: avoid; }
   }
 
+  /* ---------- SYSTEM MAP ---------- */
+  .system-map { margin-top: 22px; }
+  .sys-parent, .sys-node {
+    border: 1px solid var(--line); background: var(--paper-raised); padding: 14px 16px;
+  }
+  .sys-parent { border-left: 3px solid var(--indigo); }
+  .sys-children {
+    margin-top: 12px; padding-left: 20px; border-left: 1px solid var(--line);
+    display: grid; gap: 10px;
+  }
+  .sys-node { border-left: 3px solid var(--line); }
+  .sys-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .sys-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; color: var(--ink); }
+  .sys-status {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 4px 9px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+  }
+  .is-live { background: var(--indigo); color: var(--paper); }
+  .is-shipped { background: var(--brass); color: var(--paper); }
+  .is-paused { background: var(--indigo-pale); color: var(--indigo-deep); border: 1px solid var(--line); }
+  .is-planned { background: transparent; color: var(--text-muted); border: 1px dashed var(--line); }
+  .sys-desc { font-size: 14px; line-height: 1.6; margin: 7px 0 0; }
+  .sys-links { font-family: var(--font-mono); font-size: 12px; margin-top: 8px; display: block; }
+  @media (max-width: 480px) {
+    .sys-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+    .sys-children { padding-left: 12px; }
+  }
+
+  /* ---------- HEADS-UP NOTE ---------- */
+  .heads-up {
+    border: 1px solid var(--line); border-left: 3px solid var(--brass);
+    background: var(--paper-raised); padding: 14px 16px; margin-top: 16px;
+  }
+  .heads-up p { font-size: 14px; margin: 0; }
+
   /* ---------- PHOTO FRAMES ---------- */
   .hero-layout { display: flex; gap: 32px; align-items: flex-start; }
   .hero-text { flex: 1; min-width: 0; }
@@ -413,7 +449,8 @@
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links" id="navLinks">
-      <a href="#flagship" class="nav-link" data-nav="flagship">Flagship</a>
+      <a href="#flagship" class="nav-link" data-nav="flagship">System</a>
+      <a href="#ssw" class="nav-link" data-nav="ssw">SSW</a>
       <a href="#gallery-v423" class="nav-link" data-nav="gallery-v423 gallery-v87 gallery-bunka gallery-lifeline more-work">Exhibits</a>
       <a href="#experience" class="nav-link" data-nav="experience">Experience</a>
       <a href="#why-fit" class="nav-link" data-nav="why-fit">Fit</a>
@@ -472,11 +509,61 @@
   <section id="flagship" aria-label="Flagship project">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Flagship</span>
-        <h2>Nugget Nihongo / SSW Konstruksi</h2>
+        <span class="eyebrow">The system</span>
+        <h2>Nugget Nihongo</h2>
       </div>
-      <div class="role-line"><strong>Founder &amp; Prompt Director</strong> · Apr 2026 – Present</div>
-      <p>A live Japanese-learning PWA for Indonesian workers preparing for Japan's Specified Skilled Worker (Konstruksi) exam. I directed the entire build — architecture, content, and QA — end-to-end, acting purely as prompt director rather than hands-on producer.</p>
+      <div class="role-line"><strong>Founder &amp; Prompt Director</strong> · Feb 2026 – Present</div>
+      <p>One platform, several tracks. Nugget Nihongo is a free, offline-first Japanese-learning app for Indonesian learners, JLPT N5 through N1, with its teaching methodology designed on a research corpus I compiled rather than on guesswork. Everything below is a part of it, not a separate project.</p>
+
+      <div class="system-map">
+        <div class="sys-parent">
+          <div class="sys-head">
+            <span class="sys-name">Nugget Nihongo — the platform</span>
+            <span class="sys-status is-paused">Paused</span>
+          </div>
+          <p class="sys-desc">2,692 vocabulary and 859 grammar entries, spaced repetition, eleven quiz modes, cloud progress sync. Curriculum designed on <strong>747 audited research sources</strong> (APA 7th, 43 thematic clusters, ~45% DOI-verified). Build-out paused Apr 2026 — see the note below.</p>
+          <span class="sys-links"><a href="https://github.com/nuggetenak/nugget-nihongo" target="_blank" rel="noopener">repo</a> · <a href="https://nugget-nihongo.pages.dev/" target="_blank" rel="noopener">live (frozen snapshot)</a></span>
+        </div>
+
+        <div class="sys-children">
+          <div class="sys-node">
+            <div class="sys-head">
+              <span class="sys-name">SSW Konstruksi</span>
+              <span class="sys-status is-live">Live · 3 exam passes</span>
+            </div>
+            <p class="sys-desc">The exam-preparation track, and the one I concentrated on. 1,438 bilingual flashcards plus 1,075 quiz, exam-mockup and simulation questions. Detailed below.</p>
+          </div>
+          <div class="sys-node">
+            <div class="sys-head">
+              <span class="sys-name">Anki Deck Series</span>
+              <span class="sys-status is-shipped">2 shipped</span>
+            </div>
+            <p class="sys-desc">Companion decks that feed the platform: 1,861 cards on SSW infrastructure and construction terminology, 1,031 on Japanese culture. Both exhibited further down.</p>
+          </div>
+          <div class="sys-node">
+            <div class="sys-head">
+              <span class="sys-name">Further SSW tracks</span>
+              <span class="sys-status is-planned">Roadmap</span>
+            </div>
+            <p class="sys-desc">The Konstruksi track is the template. The remaining Specified Skilled Worker fields follow the same structure once the platform resumes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="heads-up">
+        <p><strong>Straight answer on the paused platform:</strong> I hit a personal budget ceiling in April 2026 and had to choose — keep building the platform broadly, or finish the one track with a real external deadline. I chose the track, and three people passed the exam on it. The platform's interface is complete and you can click through it, but it stopped mid-way through a content-database migration, so the lists will read zero. That's the honest state of it, and it's the decision I'd make again.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="ssw" aria-label="Shipped track: SSW Konstruksi">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Shipped track</span>
+        <h2>SSW Konstruksi</h2>
+      </div>
+      <p>The track I concentrated on when the platform paused. A Japanese-learning app for Indonesian workers preparing for Japan's Specified Skilled Worker (Konstruksi) exam — directed end-to-end, architecture through content and QA, as prompt director rather than hands-on producer.</p>
 
       <div class="stat-grid">
         <div class="stat-box"><span class="n">1,438</span><span class="l">bilingual flashcards</span></div>
@@ -805,17 +892,17 @@
       </div>
       <div class="work-grid">
         <div class="work-card">
-          <h3>Multi-agent academic corpus</h3>
-          <p>Ran a 5-agent system — separate agents for integration, vocabulary, book indexing, grammar, and UI — to build a citation-backed research corpus and structured JLPT vocabulary sets, each following a strict schema I set and enforced.</p>
-          <div class="stat">~880+ sources, DOI-verified</div>
+          <h3>Multi-agent research corpus</h3>
+          <p>Ran a multi-agent system — separate agents for integration, vocabulary, book indexing, grammar, and UI — to compile the research base underneath Nugget Nihongo's teaching methodology, every entry following a schema I set and enforced, then audited across sixteen consolidation passes.</p>
+          <div class="stat">747 sources · APA 7th · 43 clusters · ~45% DOI-verified</div>
         </div>
         <div class="work-card">
-          <h3>日本の文化 — Japanese Culture deck</h3>
+          <h3>Anki Deck Series — 日本の文化</h3>
           <p>A 5-branch, 30-category cultural taxonomy — cuisine, history &amp; era, daily life, arts &amp; crafts, ritual &amp; spirituality. Every card carries example sentences and cultural notes, not just a translation pair.</p>
           <div class="stat">1,031 cards</div>
         </div>
         <div class="work-card">
-          <h3>SSW Lifeline &amp; Infrastruktur deck</h3>
+          <h3>Anki Deck Series — SSW Lifeline &amp; Infrastruktur</h3>
           <p>A 4-branch, 32-category construction-industry taxonomy — site safety, tools &amp; technical, construction types, labor law &amp; qualifications — the exact terminology tested in the exam I passed.</p>
           <div class="stat">1,861 cards</div>
         </div>
@@ -845,6 +932,11 @@
           <h3>F&amp;B Service, multiple roles</h3>
           <p>Including main-course buffet service for 200–700 guests/day at a 5-star hotel under HACCP procedures — fast-paced, high-volume, deadline-driven work.</p>
         </div>
+        <div class="tl-item">
+          <div class="tl-date">2019 – 2021</div>
+          <h3>Videographer — Doc.Mentation</h3>
+          <p>Co-ran a two-person videography brand with a friend through secondary school — shooting, editing and delivering two wedding films, paid event documentation, and school production work. Where the eye came from, before the AI crew.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -858,7 +950,7 @@
       <ul class="fit-list">
         <li><span class="fit-check">&#10003;</span><p>The role needs someone who <strong>directs</strong> AI tools, not someone who operates them by hand — that's the entire premise of everything above.</p></li>
         <li><span class="fit-check">&#10003;</span><p>The role needs <strong>judgment and consistency</strong>, not filming/editing skills — I already run a compare-and-QA habit across AI agent outputs before anything ships.</p></li>
-        <li><span class="fit-check">&#10003;</span><p>Photography/cinematography background — a head start on directing an AI cinematographer with actual intention, not guessed prompts.</p></li>
+        <li><span class="fit-check">&#10003;</span><p>I have actually shot and delivered video — weddings, events, documentation — so when the AI cinematographer returns a bad frame or slack pacing, I know why it's wrong. The ad says no editing skills needed; the <strong>judgment</strong> it asks for instead is the part I already have.</p></li>
         <li><span class="fit-check">&#10003;</span><p>Comfortable being the single point of continuity across a fast-moving AI pipeline, including keeping non-technical stakeholders in the loop.</p></li>
       </ul>
     </div>
@@ -903,6 +995,34 @@
           <div class="link-card-sub">one page, ATS-friendly, matches this portfolio</div>
         </div>
         <a href="assets/Nugroho-Pangestu-Resume.pdf" download>Download</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Instagram — photography &amp; cinematography</div>
+          <div class="link-card-sub">@nugroho_pangestu__</div>
+        </div>
+        <a href="https://www.instagram.com/nugroho_pangestu__" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Instagram — Doc.Mentation</div>
+          <div class="link-card-sub">the videography brand I co-ran, 2019–2021</div>
+        </div>
+        <a href="https://www.instagram.com/doc.mentation" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">Nugget Nihongo — the platform</div>
+          <div class="link-card-sub">paused Apr 2026 · interface complete, content lists read zero</div>
+        </div>
+        <a href="https://nugget-nihongo.pages.dev/" target="_blank" rel="noopener">Open</a>
+      </div>
+      <div class="link-card">
+        <div>
+          <div class="link-card-label">GitHub — Nugget Nihongo</div>
+          <div class="link-card-sub">nuggetenak/nugget-nihongo · corpus on branch corpus/v17-pass15</div>
+        </div>
+        <a href="https://github.com/nuggetenak/nugget-nihongo" target="_blank" rel="noopener">Open</a>
       </div>
       <div class="link-card">
         <div>

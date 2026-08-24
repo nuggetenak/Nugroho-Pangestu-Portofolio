@@ -9,7 +9,7 @@
 <style>
   @page {
     size: A4;
-    margin: 11mm 14mm 10mm 14mm;
+    margin: 13mm 15mm 13mm 15mm;
   }
 
   /* ---- Kinobi / ATS standard: ONE font family, monochrome, single column ---- */
@@ -17,8 +17,8 @@
 
   body {
     font-family: Carlito, Calibri, "Liberation Sans", Arial, sans-serif;
-    font-size: 9.35pt;
-    line-height: 1.27;
+    font-size: 10pt;
+    line-height: 1.38;
     color: #000000;
     margin: 0;
   }
@@ -51,20 +51,24 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.9pt;
-    margin: 8pt 0 0 0;
+    margin: 11pt 0 0 0;
     padding: 0 0 1.5pt 0;
     border-bottom: 0.9pt solid #000000;
     line-height: 1.2;
   }
 
-  h2 + * { margin-top: 4pt; }
+  h2 + * { margin-top: 5.5pt; }
+
+  /* keep a heading with the block it introduces, and keep a job entry whole */
+  h2 { break-after: avoid; page-break-after: avoid; }
+  .entry, .edu, .kv { break-inside: avoid; page-break-inside: avoid; }
 
   p { margin: 0; }
 
   .summary { text-align: justify; }
 
   /* ---------- ENTRIES ---------- */
-  .entry { margin-top: 5pt; }
+  .entry { margin-top: 7pt; }
   .entry:first-of-type { margin-top: 0; }
 
   .entry-head {
@@ -95,7 +99,7 @@
   }
 
   li {
-    margin: 0 0 1pt 0;
+    margin: 0 0 2pt 0;
     padding-left: 1pt;
     text-align: justify;
   }
@@ -108,8 +112,8 @@
     justify-content: space-between;
     align-items: baseline;
     gap: 8pt;
-    margin-top: 2.2pt;
-    line-height: 1.28;
+    margin-top: 3.2pt;
+    line-height: 1.34;
   }
 
   .edu:first-of-type { margin-top: 0; }
@@ -118,7 +122,7 @@
   .edu-date { font-size: 9.2pt; white-space: nowrap; flex-shrink: 0; }
 
   /* ---------- SKILLS / LANGUAGES ---------- */
-  .kv { margin-top: 2.2pt; line-height: 1.3; }
+  .kv { margin-top: 3.4pt; line-height: 1.36; }
   .kv:first-of-type { margin-top: 0; }
   .kv-label { font-weight: 700; }
 </style>
@@ -129,11 +133,11 @@
   <div class="headline">AI Workflow Director | Marketing &amp; Content Operations</div>
   <p class="contact">
     +62 812-3131-2621 | nugrohopangestu85@gmail.com | Bali, Indonesia<br>
-    Portfolio: nuggetenak.github.io/Nugroho-Pangestu-Portofolio
+    Portfolio: nuggetenak.github.io/Nugroho-Pangestu-Portofolio | Photo &amp; video: instagram.com/nugroho_pangestu__
   </p>
 
   <h2>Summary</h2>
-  <p class="summary">AI workflow director and self-taught developer experienced in running full AI multi-agent pipelines end-to-end — architecture, content, and QA — acting purely as prompt director rather than hands-on producer. Currently building and maintaining a live Japanese-language learning platform (1,400+ flashcards, spaced repetition, PWA) for Indonesian workers entering Japan's Specified Skilled Worker Construction program. Also coordinate recruitment communications and logistics for Japan-bound job candidates. Bilingual Indonesian–English (IELTS 6.5 equivalent).</p>
+  <p class="summary">AI workflow director and self-taught developer experienced in running full AI multi-agent pipelines end-to-end — architecture, content, and QA — acting purely as prompt director rather than hands-on producer. Founder of Nugget Nihongo, a Japanese-learning platform for Indonesian learners whose curriculum is designed on a 747-entry research corpus, and whose exam-preparation track has now carried three candidates through Japan's Specified Skilled Worker Construction exam. Also coordinate recruitment communications and logistics for Japan-bound job candidates, with an earlier background in photography and videography. Bilingual Indonesian–English (IELTS 6.5 equivalent).</p>
 
   <h2>Experience</h2>
 
@@ -150,14 +154,16 @@
 
   <div class="entry">
     <div class="entry-head">
-      <span class="entry-role">Founder &amp; Prompt Director <span class="entry-org">— Nugget Nihongo / SSW Konstruksi (Independent Project)</span></span>
-      <span class="entry-date">04/2026 – Present</span>
+      <span class="entry-role">Founder &amp; Prompt Director <span class="entry-org">— Nugget Nihongo (Independent Project)</span></span>
+      <span class="entry-date">02/2026 – Present</span>
     </div>
     <ul>
-      <li>Directed the end-to-end build of a Japanese-learning PWA (React/Vite) for Indonesian SSW-exam candidates — 1,438 bilingual flashcards (Indonesian &amp; Japanese) focusing on Lifeline &amp; Equipment track, plus 1,075 quiz, exam-mockup &amp; simulation questions</li>
+      <li>Founded and directed an offline-first Japanese-learning platform (PWA) covering JLPT N5 to N1 — 2,692 vocabulary and 859 grammar entries, spaced-repetition scheduling, eleven quiz modes and cloud progress sync — built for Indonesian learners at no cost to them</li>
       <li>Ran the entire build as prompt director across a multi-agent AI workflow — architecture, data quality, QA, content, schema migrations, codebase cleanup — entirely from a mobile device, with no formal programming background</li>
-      <li>Directed three further multi-agent content pipelines to the same schema-enforced standard — a 1,861-card SSW construction terminology deck, a 1,031-card Japanese culture deck, and a DOI-verified research corpus of roughly 880 sources built across five specialist agents</li>
-      <li>Personally passed the SSW Konstruksi Lifeline &amp; Peralatan exam using the platform (Apr 2026); two mentees independently passed the same exam using an earlier build (Aug 2026), validating the content's real-world effectiveness beyond its creator</li>
+      <li>Designed the platform's teaching methodology on a research corpus of 747 audited sources (APA 7th, 43 thematic clusters, roughly 45 percent DOI-verified), compiled and cross-checked through a multi-agent review workflow</li>
+      <li><strong>SSW Konstruksi track</strong> — shipped and live: a React/Vite exam-preparation app with 1,438 bilingual flashcards and 1,075 quiz, exam mockup and simulation questions. Passed the SSW Konstruksi Lifeline &amp; Peralatan exam using it (Apr 2026); two mentees independently passed the same exam on an earlier build (Aug 2026)</li>
+      <li><strong>Anki Deck Series</strong> — shipped: a 1,861-card SSW infrastructure and construction terminology deck, and a 1,031-card Japanese culture deck, each built to a defined taxonomy with example sentences and usage notes</li>
+      <li>Paused further platform build-out in Apr 2026 under a personal budget constraint, concentrating remaining resources on the SSW track — the one component with a hard external deadline — rather than spreading them thin across all of it</li>
     </ul>
   </div>
 
@@ -201,6 +207,16 @@
     </ul>
   </div>
 
+  <div class="entry">
+    <div class="entry-head">
+      <span class="entry-role">Videographer <span class="entry-org">— Doc.Mentation (freelance collaboration)</span></span>
+      <span class="entry-date">2019 – 2021</span>
+    </div>
+    <ul>
+      <li>Co-ran a two-person videography brand through secondary school — shot, edited and delivered two wedding films, event documentation for paying clients, and school production work</li>
+    </ul>
+  </div>
+
   <h2>Education</h2>
 
   <div class="edu">
@@ -221,9 +237,11 @@
   </div>
 
   <h2>Skills</h2>
-  <div class="kv"><span class="kv-label">AI &amp; Content:</span> AI Workflow Direction, Prompt Engineering, Multi-Agent Orchestration, Content Pipeline Management, Quality Assurance, Photography, Cinematography</div>
+  <div class="kv"><span class="kv-label">AI &amp; Content:</span> AI Workflow Direction, Prompt Engineering, Multi-Agent Orchestration, Content Pipeline Management, Quality Assurance</div>
+  <div class="kv"><span class="kv-label">Visual:</span> Photography, Cinematography, Videography, Visual Direction</div>
   <div class="kv"><span class="kv-label">Operations &amp; People:</span> Candidate &amp; Client Communication, Leadership, Cost Management, Stock Management, Multitasking, Teamwork, Time Management</div>
-  <div class="kv"><span class="kv-label">Tools:</span> Microsoft Word, Microsoft Excel, Microsoft PowerPoint</div>
+  <div class="kv"><span class="kv-label">AI Tools:</span> Claude, ChatGPT, Gemini</div>
+  <div class="kv"><span class="kv-label">Software:</span> Google Workspace (Docs, Sheets, Drive, Keep), Microsoft Word, Excel, PowerPoint, Canva; Adobe Premiere Pro, After Effects and Lightroom (basic)</div>
 
   <h2>Languages</h2>
   <div class="kv"><span class="kv-label">Indonesian</span> — Native</div>
