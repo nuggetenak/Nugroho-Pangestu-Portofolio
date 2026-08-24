@@ -1,13 +1,14 @@
 # HANDOFF.md — Nugroho-Pangestu-Portofolio
 
-> ## 🟢 Session 5 done — restructured around the real project hierarchy — 2026-08-24
-> The owner corrected a structural misrepresentation: **Nugget Nihongo is the platform**;
-> SSW Konstruksi, the Anki Deck Series and future SSW tracks are all *inside* it. The site
-> and résumé had SSW Konstruksi as the top-level flagship. Both rebuilt around the correct
-> hierarchy. Corpus and platform figures re-counted from the repo — the old ones were wrong.
+> ## 🟢 Session 6 done — third exam pass, Links redesigned — 2026-08-24
+> A **third junior passed** the SSW exam on 24 Aug 2026 — four people total now. Count updated
+> everywhere. Links section redesigned from eleven flat rows into grouped blocks, Skills
+> regrouped with the owner's tool list, availability confirmed and published.
 >
-> **🔵 One open item** in ACTIVE TASKS: the Doc.Mentation date range needs the owner to
-> confirm. Everything else is shipped.
+> Session 5's structural work still stands: **Nugget Nihongo is the platform**; SSW Konstruksi,
+> the Anki Deck Series and future SSW tracks are *inside* it. Figures verified from the repo.
+>
+> **🔵 Two open items** in ACTIVE TASKS. Everything else is shipped.
 
 ---
 
@@ -86,6 +87,15 @@ platform with a system map; `#ssw` is a separate section for the track. SSW stay
 page on purpose — it's the node with verifiable proof — but it is no longer presented as the
 parent.
 
+**Exam passes — the headline proof, keep it exact** (`0f1ebcd`)
+
+Four people have passed the SSW Konstruksi Lifeline & Peralatan exam using this content:
+the owner (27 Apr 2026), two mentees (20 Aug 2026), and a third mentee (24 Aug 2026). All
+three mentees studied the **v87** build, not v4.23.0. Phrasing across the site is "three
+juniors" / "four people" / "three sittings" — if a fourth mentee passes, note that eight
+separate strings carried the previous count and `grep -n '3-for-3\|three juniors\|4 exam
+passes\|four people'` is the way to find them all.
+
 **Verified figures — do not re-guess these** (all counted from the repo, session 5)
 
 | Figure | Value | Source of truth |
@@ -137,14 +147,20 @@ Person schema, `@media print`, WebP via `<picture>`, `icons/`.
   **One number, needs his word.** Note it overlaps Cerita Hati (12/2020–05/2023), which is
   plausible but worth him seeing.
 
-- [ ] 🔵 **Owner to check both Instagram accounts are public** and read well top-to-bottom.
-  `@nugroho_pangestu__` is personal-account-shaped; a recruiter will scroll all of it.
-  `@doc.mentation` is the stronger link — it's actual portfolio work. Instagram blocks
-  automated access so neither could be verified from here.
+- [ ] 🔵 **Device constraint — owner's call, deliberately not published.** The owner mentioned
+  his only constraint is hardware: he works from a phone, no laptop. The site already frames
+  this as a strength ("built from a phone, no laptop", "0 lines hand-coded"). It was **not**
+  added anywhere as a limitation, because restating it as a constraint would undercut the
+  framing that's already working. If the owner wants it disclosed to the employer, that's a
+  conversation for the interview, not a line on the portfolio — but flag it to him again if
+  he asks about equipment.
 
-- [ ] 🔵 **Availability line.** Still open from session 4. The role is part-time, on-site
-  Canggu, Mon–Fri 1pm–6pm. The site says "Bali, Indonesia" but never confirms the schedule
-  works. Needs the owner's actual availability — don't invent a commitment.
+- [ ] 🔵 **Owner to check both Instagram accounts are public** and read well top-to-bottom.
+  `@nugroho_pangestu__` is personal-account-shaped; a recruiter will scroll all of it. It is
+  now labelled "Personal account" rather than "photography & cinematography" — the owner
+  confirmed it isn't a portfolio. `@doc.mentation` is the stronger link and now leads the
+  Visual work group; it's also the one on the résumé contact line. Instagram blocks automated
+  access so neither could be verified from here.
 
 - [ ] 🔵 **Name the role.** Also from session 4. The hero says "prepared for Nick" but never
   names the position. Sharper if named, but only if this link isn't being reused elsewhere.
@@ -152,6 +168,11 @@ Person schema, `@media print`, WebP via `<picture>`, `icons/`.
 <details>
 <summary>Closed tasks (sessions 3–5)</summary>
 
+- [x] **Availability.** Confirmed by the owner and published — Mon–Fri 1pm–6pm on-site in
+  Canggu, Bali-based, no relocation. In the contact block at the top of `#links`.
+- [x] **Links section too flat.** Redesigned session 6, `0f1ebcd`.
+- [x] **Site skills out of sync with the résumé.** Fixed session 6 — five labelled tiers,
+  tools added, Adobe marked basic.
 - [x] **Project hierarchy misrepresented.** Fixed session 5, `21b1757`.
 - [x] **Corpus / platform figures wrong.** Re-counted session 5. See table above.
 - [x] **Add Doc.Mentation, Instagram, videography.** Shipped session 5.
