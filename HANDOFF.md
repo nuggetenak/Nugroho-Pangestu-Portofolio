@@ -1,17 +1,12 @@
 # HANDOFF.md — Nugroho-Pangestu-Portofolio
 
-> ## 🟡 Session 2 done, one thing needs the owner's eyes — 2026-08-23
-> All 4 🟢 tasks from session 1 are shipped, committed, and pushed to `main` (`d825...` through
-> `cdd2828` — see CURRENT STATE below for the full list). The 2 🔵 tasks are still gated on the
-> owner exactly as session 1 left them; nothing started there.
+> ## 🟢 Session 3 done — all active tasks closed — 2026-08-24
+> Résumé PDF shipped (`11a806e`). Visit tracker: owner decided against it, removed from the
+> task list rather than left gated. The bunka/torii question from session 2's banner: owner
+> reviewed and said the site's solid as-is, don't revisit it — closed, not carried forward.
 >
-> **Flagged, not changed:** the owner told the agent (in chat, not in this file) that the
-> `bunka` gallery's card screenshots were actually showing SSW Konstruksi content, not
-> 日本の文化. Session 2 checked — card back in `bunka-03-kartu-belakang.jpg` has a `日本 文化`
-> footer stamped on the card itself, and the site's own caption for `bunka-02` already read
-> "kanji + reading (鳥居 / torii)" before this session touched anything. Both point the same
-> way: correct as-is. Left every byte of the bunka/lifeline galleries untouched pending the
-> owner confirming which image they actually meant — do the same if you're picking this up.
+> No 🟢 or 🔵 tasks currently open. Next agent picking this up: read CURRENT STATE below for
+> what's live, but there's nothing queued to work on until the owner adds something.
 
 ---
 
@@ -67,10 +62,26 @@ Then: PROTOCOL section below, first.
 
 ---
 
-## CURRENT STATE (2026-08-23, end of session 2)
+## CURRENT STATE (2026-08-24, end of session 3)
 
-- Live and correct as of commit `cdd2828`.
-- Stack unchanged: single `index.html`, vanilla CSS + JS, zero dependencies, GitHub Pages.
+- Live and correct as of commit `11a806e`.
+- Résumé: `assets/Nugroho-Pangestu-Resume.pdf`, one A4 page, built from the owner's original CV
+  (not invented from on-page copy) with 2 targeted edits to match the portfolio — the exam-pass
+  bullet now covers the 2 mentees + v87, and the portfolio URL is in the contact line. Everything
+  else in it is the owner's original text, untouched. Rendered via WeasyPrint using the site's
+  actual brand fonts (`fonts-ibm-plex` apt package + the Big Shoulders/Plex Mono files already
+  under `canvas-fonts/`), fonts embedded/subsetted, ~40KB. Linked from a 3rd hero CTA and a
+  link-card (first in the list, above the app links) in Links. (`11a806e`)
+- `@media print` pass added alongside it — hides `.topnav`/`.cta-row`/lightbox, `break-inside:
+  avoid` on the card grids — for the case Nick prints the page itself instead of the PDF.
+  (`11a806e`)
+- Visit tracker: not implemented, owner decided it's not needed. Not gated anymore — off the
+  list entirely unless the owner brings it back up.
+- Stack still unchanged otherwise: single `index.html`, vanilla CSS + JS, zero dependencies,
+  GitHub Pages.
+
+**Carried from session 2** (all still live, untouched by session 3):
+
 - Lightbox now supports prev/next + arrow keys + an "N / total" counter, scoped per
   `.gallery-grid` (so v423's 8 don't bleed into v87's 10, etc.) — same `<script>` IIFE, no new
   files. (`d6f688d`)
@@ -94,30 +105,26 @@ Then: PROTOCOL section below, first.
 
 ## ACTIVE TASKS
 
-### 🟢 Unblocked — done this session
+Nothing open right now — both 🔵 items from session 2 are resolved (one shipped, one dismissed
+by the owner). Add new tasks here as they come up; keep the 🟢/🔵 convention for anything that
+needs owner input first.
 
-- [x] **Lightbox prev/next + counter.** Done — `d6f688d`.
+<details>
+<summary>Closed tasks (session 3)</summary>
 
-- [x] **WebP for the 24 exhibit screenshots.** Done for 22; the other 2 were already `.webp`.
-  `3603800`.
-
-- [x] **Alt-text on 18 images.** Done — `d96285a`.
-
-- [x] **`apple-touch-icon` + standard favicon sizes.** Done — `cdd2828`.
-
-### 🔵 Gated on an owner decision — ask before starting
-
-- [ ] **Downloadable résumé PDF.** Needs the owner to supply the actual PDF — not something an
-  agent should generate or invent from the on-page copy. Once supplied: drop it at e.g.
+- [x] **Downloadable résumé PDF.** Shipped — `11a806e`. Turned out the "owner supplies the PDF"
+  assumption below didn't apply as written: the owner instead said to adjust their existing CV
+  (supplied earlier in the same chat, not on-page copy) and generate the PDF from that. Original
+  task note, for context: *"Needs the owner to supply the actual PDF — not something an agent
+  should generate or invent from the on-page copy. Once supplied: drop it at e.g.
   `assets/Nugroho-Pangestu-Resume.pdf`, add a link-card in the Links section plus maybe a hero
-  CTA ("Download résumé"). A `@media print` pass on `index.html` while in there isn't a bad
-  idea either (hide nav/lightbox/expand-badges on print), in case someone prints the page
-  itself instead of using the PDF.
+  CTA. A `@media print` pass isn't a bad idea either."* All of the mechanical part still applied
+  as written once the source material question was settled.
 
-- [ ] **Visit tracker (e.g. GoatCounter).** Needs the owner to create the free account and hand
-  the agent their site code — not something an agent can sign up for on the owner's behalf.
-  Once they have it, the integration itself is one `<script>` tag + a `data-goatcounter`
-  attribute.
+- [x] **Visit tracker (e.g. GoatCounter).** Dismissed by the owner, not implemented — "I don't
+  think it's needed." Don't re-suggest unless they bring it up again.
+
+</details>
 
 ---
 
