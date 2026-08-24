@@ -58,6 +58,15 @@
     outline: 2px solid var(--indigo); outline-offset: 3px; border-radius: 2px;
   }
 
+  .skip-link {
+    position: absolute; left: 12px; top: -60px; z-index: 200;
+    background: var(--indigo); color: var(--paper);
+    font-family: var(--font-mono); font-size: 13px;
+    padding: 10px 16px; border-radius: 3px;
+    transition: top 0.15s ease;
+  }
+  .skip-link:focus { top: 12px; }
+
   .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
 
   h1, h2, h3 {
@@ -374,10 +383,12 @@
 </head>
 <body>
 
+<a class="skip-link" href="#flagship">Skip to content</a>
+
 <nav class="topnav" id="topnav" aria-label="Primary">
   <div class="wrap topnav-inner">
-    <a href="#top" class="topnav-mark" aria-label="Kembali ke atas">N</a>
-    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu navigasi">
+    <a href="#top" class="topnav-mark" aria-label="Back to top">N</a>
+    <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open navigation menu">
       <span></span><span></span><span></span>
     </button>
     <div class="nav-links" id="navLinks">
@@ -412,8 +423,8 @@
       </div>
       <div class="hero-photo">
         <div class="photo-frame">
-          <img src="images/profile.jpg" alt="Foto Nugroho Pangestu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div class="photo-placeholder" style="display:none;">taruh foto di<br>images/profile.jpg</div>
+          <img src="images/profile.jpg" alt="Nugroho Pangestu" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="photo-placeholder" style="display:none;">Photo<br>unavailable</div>
         </div>
       </div>
     </div>
@@ -437,7 +448,7 @@
 
 <main>
 
-  <section id="flagship">
+  <section id="flagship" aria-label="Flagship project">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Flagship</span>
@@ -483,7 +494,7 @@
     </div>
   </section>
 
-  <section id="gallery-v423">
+  <section id="gallery-v423" aria-label="Exhibit: build v4.23.0">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Exhibit — v4.23.0</span>
@@ -497,7 +508,7 @@
               <source type="image/webp" srcset="images/v423/v423-01-beranda.webp">
               <img src="images/v423/v423-01-beranda.jpg" alt="Beranda tab: streak counter and daily misi" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-01-beranda.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">A —</span>Beranda — streak counter, a daily "misi," current-track progress, one-tap into Kartu/Kuis/Sprint/JAC</figcaption>
         </figure>
@@ -507,7 +518,7 @@
               <source type="image/webp" srcset="images/v423/v423-02-belajar-menu.webp">
               <img src="images/v423/v423-02-belajar-menu.jpg" alt="Belajar tab: full mode menu, technical bank and vocab set" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-02-belajar-menu.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">B —</span>Belajar tab — full mode menu: 579-Q technical bank, 380-word vocab set, JAC official practice, still the same 1,438-card base</figcaption>
         </figure>
@@ -517,7 +528,7 @@
               <source type="image/webp" srcset="images/v423/v423-03-kartu-depan.webp">
               <img src="images/v423/v423-03-kartu-depan.jpg" alt="Kartu mode: question side with furigana and live counter" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-03-kartu-depan.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">C —</span>Kartu mode — question side, furigana + kanji, live hafal/belum/sisa counter</figcaption>
         </figure>
@@ -527,7 +538,7 @@
               <source type="image/webp" srcset="images/v423/v423-04-kartu-fsrs.webp">
               <img src="images/v423/v423-04-kartu-fsrs.jpg" alt="Kartu mode: answer side with translation and FSRS rating" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-04-kartu-fsrs.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">D —</span>Kartu mode — flip side: translation, notes, and an FSRS four-point rating (Lagi/Susah/Oke/Mudah)</figcaption>
         </figure>
@@ -537,7 +548,7 @@
               <source type="image/webp" srcset="images/v423/v423-05-kuis-setup.webp">
               <img src="images/v423/v423-05-kuis-setup.jpg" alt="Kuis setup: difficulty tiers and category filter" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-05-kuis-setup.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">E —</span>Kuis setup — 3 adaptive difficulty tiers plus an 11-category filter, configurable per session</figcaption>
         </figure>
@@ -547,7 +558,7 @@
               <source type="image/webp" srcset="images/v423/v423-06-kuis-feedback.webp">
               <img src="images/v423/v423-06-kuis-feedback.jpg" alt="Kuis mode: wrong answer flagged with explanation" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-06-kuis-feedback.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">F —</span>Kuis in progress — wrong pick flagged, correct answer plus a one-line explanation surfaced immediately</figcaption>
         </figure>
@@ -557,7 +568,7 @@
               <source type="image/webp" srcset="images/v423/v423-07-kuis-campuran.webp">
               <img src="images/v423/v423-07-kuis-campuran.jpg" alt="Kuis mode: cross-topic distractor answer choices" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-07-kuis-campuran.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">G —</span>Kuis — distractors pulled across unrelated sub-topics (mixer vs. flashing vs. waterproofing), not just close synonyms</figcaption>
         </figure>
@@ -567,7 +578,7 @@
               <source type="image/webp" srcset="images/v423/v423-08-saya-progres.webp">
               <img src="images/v423/v423-08-saya-progres.jpg" alt="Saya tab: progress ring, streak, and achievement badges" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v423/v423-08-saya-progres.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">H —</span>Saya tab — progress ring, streak, 14 achievement badges, SRS maturity split (Matang/Muda/Baru), question-of-the-day</figcaption>
         </figure>
@@ -575,7 +586,7 @@
     </div>
   </section>
 
-  <section id="gallery-v87">
+  <section id="gallery-v87" aria-label="Exhibit: build v87">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Exhibit — v87 snapshot</span>
@@ -589,7 +600,7 @@
               <source type="image/webp" srcset="images/v87/v87-01-belajar-overview.webp">
               <img src="images/v87/v87-01-belajar-overview.jpg" alt="Belajar tab: Konsep/Vocab split with 4 study modes" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-01-belajar-overview.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">A —</span>Belajar tab — Konsep/Vocab split, 4 study modes, 1,438 cards</figcaption>
         </figure>
@@ -599,7 +610,7 @@
               <source type="image/webp" srcset="images/v87/v87-02-flashcard-mode.webp">
               <img src="images/v87/v87-02-flashcard-mode.jpg" alt="Kartu mode: flip-to-reveal Japanese term and meaning" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-02-flashcard-mode.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">B —</span>Kartu mode — flip-to-reveal, JP term to Indonesian meaning</figcaption>
         </figure>
@@ -609,7 +620,7 @@
               <source type="image/webp" srcset="images/v87/v87-03-jac-official.webp">
               <img src="images/v87/v87-03-jac-official.jpg" alt="JAC Official exam mode: 95 real questions" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-03-jac-official.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">C —</span>Ujian → JAC Official — 95 real exam questions, split 学科/実技</figcaption>
         </figure>
@@ -619,7 +630,7 @@
               <source type="image/webp" srcset="images/v87/v87-04-simulasi.webp">
               <img src="images/v87/v87-04-simulasi.jpg" alt="Simulasi mode: full Prometric-format mock exam" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-04-simulasi.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">D —</span>Simulasi — full Prometric-format mock exam, 90 sec/soal, 65% to pass</figcaption>
         </figure>
@@ -629,21 +640,21 @@
               <source type="image/webp" srcset="images/v87/v87-05-soal-jebak.webp">
               <img src="images/v87/v87-05-soal-jebak.jpg" alt="Soal Jebak mode: confusable-term trap questions" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-05-soal-jebak.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">E —</span>Soal Jebak — 20 confusable-term traps, JAC exam style</figcaption>
         </figure>
         <figure class="gallery-item">
           <div class="gallery-frame">
             <img src="images/v87/v87-06-wayground.webp" alt="Wayground mode: external quiz sets" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-06-wayground.webp</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">F —</span>Wayground — 26 external quiz sets, 622 practice questions</figcaption>
         </figure>
         <figure class="gallery-item">
           <div class="gallery-frame">
             <img src="images/v87/v87-07-angka-list.webp" alt="Referensi Angka: key exam numbers list" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-07-angka-list.webp</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">G —</span>Referensi → Angka — 28 numbers the exam actually tests</figcaption>
         </figure>
@@ -653,7 +664,7 @@
               <source type="image/webp" srcset="images/v87/v87-08-angka-detail.webp">
               <img src="images/v87/v87-08-angka-detail.jpg" alt="Angka detail: number linked to source card" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-08-angka-detail.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">H —</span>Angka detail — each number links back to its source card</figcaption>
         </figure>
@@ -663,7 +674,7 @@
               <source type="image/webp" srcset="images/v87/v87-09-sumber-pdf.webp">
               <img src="images/v87/v87-09-sumber-pdf.jpg" alt="Referensi Sumber: source PDFs browsable by chapter" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-09-sumber-pdf.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">I —</span>Referensi → Sumber — 16 source PDFs, browsable by chapter</figcaption>
         </figure>
@@ -673,7 +684,7 @@
               <source type="image/webp" srcset="images/v87/v87-10-progres.webp">
               <img src="images/v87/v87-10-progres.jpg" alt="Progres tab: per-category mastery tracker" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/v87/v87-10-progres.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">J —</span>Progres — per-category mastery tracker, JSON backup/restore</figcaption>
         </figure>
@@ -681,7 +692,7 @@
     </div>
   </section>
 
-  <section id="gallery-bunka">
+  <section id="gallery-bunka" aria-label="Exhibit: Japanese culture deck">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Exhibit — 日本の文化</span>
@@ -695,7 +706,7 @@
               <source type="image/webp" srcset="images/bunka/bunka-01-deck-tree.webp">
               <img src="images/bunka/bunka-01-deck-tree.jpg" alt="Screenshot deck 日本の文化 1" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/bunka/bunka-01-deck-tree.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">A —</span>Deck tree in AnkiDroid — 5 branches (Kuliner &amp; Gastronomi, Jiwa &amp; Ritual, Seni &amp; Karya, Negeri &amp; Zaman, 日本生活), each branch split further into themed sub-decks</figcaption>
         </figure>
@@ -705,7 +716,7 @@
               <source type="image/webp" srcset="images/bunka/bunka-02-kartu-depan.webp">
               <img src="images/bunka/bunka-02-kartu-depan.jpg" alt="Screenshot deck 日本の文化 2" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/bunka/bunka-02-kartu-depan.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">B —</span>Card front — kanji + reading (鳥居 / torii), auto-tagged by category, tap to reveal the answer</figcaption>
         </figure>
@@ -715,7 +726,7 @@
               <source type="image/webp" srcset="images/bunka/bunka-03-kartu-belakang.webp">
               <img src="images/bunka/bunka-03-kartu-belakang.jpg" alt="Screenshot deck 日本の文化 3" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/bunka/bunka-03-kartu-belakang.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">C —</span>Card back — meaning, cultural notes, an example sentence (JP + romaji + ID), extra notes, then an FSRS rating (Again/Hard/Good/Easy)</figcaption>
         </figure>
@@ -723,7 +734,7 @@
     </div>
   </section>
 
-  <section id="gallery-lifeline">
+  <section id="gallery-lifeline" aria-label="Exhibit: SSW infrastructure deck">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Exhibit — SSW Lifeline &amp; Infrastruktur</span>
@@ -737,7 +748,7 @@
               <source type="image/webp" srcset="images/lifeline/lifeline-01-deck-tree.webp">
               <img src="images/lifeline/lifeline-01-deck-tree.jpg" alt="Screenshot deck SSW Lifeline & Infrastruktur 1" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/lifeline/lifeline-01-deck-tree.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">A —</span>Deck tree in AnkiDroid — 4 branches (Hukum &amp; Kualifikasi, Jenis Konstruksi, Lapangan &amp; K3, Alat &amp; Teknis), 32 sub-decks total, spanning everything from labor law to heavy equipment</figcaption>
         </figure>
@@ -747,7 +758,7 @@
               <source type="image/webp" srcset="images/lifeline/lifeline-02-kartu-depan.webp">
               <img src="images/lifeline/lifeline-02-kartu-depan.jpg" alt="Screenshot deck SSW Lifeline & Infrastruktur 2" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/lifeline/lifeline-02-kartu-depan.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">B —</span>Card front — kanji + furigana (作業手袋 / さぎょうてぶくろ), tagged under the SSW Infrastruktur category, tap to reveal the answer</figcaption>
         </figure>
@@ -757,7 +768,7 @@
               <source type="image/webp" srcset="images/lifeline/lifeline-03-kartu-belakang.webp">
               <img src="images/lifeline/lifeline-03-kartu-belakang.jpg" alt="Screenshot deck SSW Lifeline & Infrastruktur 3" loading="lazy" onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';">
             </picture>
-            <div class="photo-placeholder" style="display:none;">images/lifeline/lifeline-03-kartu-belakang.jpg</div>
+            <div class="photo-placeholder" style="display:none;">Screenshot<br>unavailable</div>
           </div>
           <figcaption><span class="exhibit-tag">C —</span>Card back — meaning (work gloves), context/notes on APD usage, then an FSRS rating (Again/Hard/Good/Easy)</figcaption>
         </figure>
@@ -765,7 +776,7 @@
     </div>
   </section>
 
-  <section id="more-work">
+  <section id="more-work" aria-label="Supporting work">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Supporting work</span>
@@ -791,7 +802,7 @@
     </div>
   </section>
 
-  <section id="experience">
+  <section id="experience" aria-label="Professional experience">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Track record</span>
@@ -817,7 +828,7 @@
     </div>
   </section>
 
-  <section id="why-fit">
+  <section id="why-fit" aria-label="Why this role fits">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">The match</span>
@@ -832,7 +843,7 @@
     </div>
   </section>
 
-  <section id="skills">
+  <section id="skills" aria-label="Skills and languages">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Toolkit</span>
@@ -858,7 +869,7 @@
     </div>
   </section>
 
-  <section id="links">
+  <section id="links" aria-label="Links and contact">
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Verify everything</span>
@@ -933,10 +944,10 @@
   overlay.setAttribute('aria-modal', 'true');
   overlay.setAttribute('aria-hidden', 'true');
   overlay.innerHTML =
-    '<button type="button" class="lightbox-close" aria-label="Tutup foto">&times;</button>' +
+    '<button type="button" class="lightbox-close" aria-label="Close image">&times;</button>' +
     '<div class="lightbox-counter"></div>' +
-    '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Foto sebelumnya">&#8249;</button>' +
-    '<button type="button" class="lightbox-nav lightbox-next" aria-label="Foto berikutnya">&#8250;</button>' +
+    '<button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous image">&#8249;</button>' +
+    '<button type="button" class="lightbox-nav lightbox-next" aria-label="Next image">&#8250;</button>' +
     '<img class="lightbox-img" alt="">';
   document.body.appendChild(overlay);
 
@@ -991,10 +1002,10 @@
       frame.classList.add('is-clickable');
       frame.setAttribute('tabindex', '0');
       frame.setAttribute('role', 'button');
-      frame.setAttribute('aria-label', 'Perbesar foto');
+      frame.setAttribute('aria-label', 'Expand image: ' + (img.alt || 'screenshot'));
 
       function tryOpen() {
-        if (img.style.display === 'none') return; // placeholder lagi tampil, belum ada foto asli
+        if (img.style.display === 'none') return; // placeholder showing — no real image to expand
         var liveImgs = frames
           .map(function (f) { return f.querySelector('img'); })
           .filter(function (i) { return i && i.style.display !== 'none'; });
@@ -1017,11 +1028,27 @@
   lbClose.addEventListener('click', closeLightbox);
   lbPrev.addEventListener('click', function () { showAt(currentIndex - 1); });
   lbNext.addEventListener('click', function () { showAt(currentIndex + 1); });
+  // Keep Tab inside the dialog while it's open — otherwise focus walks off
+  // behind the overlay onto links the user can't see.
+  function trapFocus(e) {
+    var items = Array.prototype.slice
+      .call(overlay.querySelectorAll('.lightbox-close, .lightbox-nav'))
+      .filter(function (el) { return el.style.display !== 'none'; });
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    var at = items.indexOf(document.activeElement);
+    if (at === -1) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
   document.addEventListener('keydown', function (e) {
     if (!overlay.classList.contains('is-open')) return;
     if (e.key === 'Escape') closeLightbox();
     else if (e.key === 'ArrowLeft') showAt(currentIndex - 1);
     else if (e.key === 'ArrowRight') showAt(currentIndex + 1);
+    else if (e.key === 'Tab') trapFocus(e);
   });
 })();
 </script>
